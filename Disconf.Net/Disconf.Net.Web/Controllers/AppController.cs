@@ -6,10 +6,8 @@ using Disconf.Net.Model.Result;
 using Disconf.Net.Web.Filters;
 using Disconf.Net.Web.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Disconf.Net.Web.Controllers
@@ -31,25 +29,39 @@ namespace Disconf.Net.Web.Controllers
             this._templateService = templateService;
             this._configService = configService;
         }
-        #region view
-        // GET: App
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             return View();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Add()
         {
             return View();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Edit()
         {
             return View();
         }
-        #endregion
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<JsonResult> Get(long id)
         {
             var model = await _appService.Get(id);
@@ -60,6 +72,12 @@ namespace Disconf.Net.Web.Controllers
             };
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
+
+        /// <summary>
+        /// 插入应用
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [ActionLogActionFilter(ActionContent = "插入应用")]
         public async Task<JsonResult> Insert(Apps model)
         {
@@ -78,6 +96,12 @@ namespace Disconf.Net.Web.Controllers
             }
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+
+        /// <summary>
+        /// 更新应用
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [ActionLogActionFilter(ActionContent = "更新应用")]
         public async Task<JsonResult> Update(Apps model)
         {
@@ -98,14 +122,16 @@ namespace Disconf.Net.Web.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        /// <summary>
+        /// 删除应用
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [ActionLogActionFilter(ActionContent = "删除应用")]
         public async Task<JsonResult> Delete(long id)
         {
             var result = new BaseResult();
-            TemplateCondition condition = new TemplateCondition
-            {
-                AppId = id
-            };
+            var condition = new TemplateCondition() { AppId = id };
             var temList = await _templateService.GetList(condition);
             if (temList.Count() > 0)
             {
@@ -120,6 +146,10 @@ namespace Disconf.Net.Web.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        /// <summary>
+        /// 获取APP应用列表
+        /// </summary>
+        /// <returns></returns>
         public async Task<JsonResult> GetList()
         {
             var model = await _appService.GetList();
@@ -139,14 +169,17 @@ namespace Disconf.Net.Web.Controllers
             return Json(list, JsonRequestBehavior.AllowGet);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="appName"></param>
+        /// <returns></returns>
         public async Task<JsonResult> InitZookeeper(int id, string appName)
         {
             try
             {
-                TemplateCondition condition = new TemplateCondition
-                {
-                    AppId = id
-                };
+                var condition = new TemplateCondition { AppId = id };
                 var temList = await _templateService.GetList(condition);
                 if (temList != null && temList.Count() != 0)
                 {

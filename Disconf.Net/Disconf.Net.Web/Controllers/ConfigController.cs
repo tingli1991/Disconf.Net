@@ -1,19 +1,13 @@
 ﻿using Disconf.Net.Application.Interfaces;
+using Disconf.Net.Domain.Condition;
+using Disconf.Net.Domain.Models;
+using Disconf.Net.Infrastructure;
+using Disconf.Net.Model.Result;
+using Disconf.Net.Web.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
-using Disconf.Net.Web.Filters;
-using Disconf.Net.Domain.Condition;
-using Disconf.Net.Model.Result;
-using Disconf.Net.Domain.Models;
-using System.IO;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
-using Disconf.Net.Web.Models;
-using Disconf.Net.Infrastructure;
 
 namespace Disconf.Net.Web.Controllers
 {

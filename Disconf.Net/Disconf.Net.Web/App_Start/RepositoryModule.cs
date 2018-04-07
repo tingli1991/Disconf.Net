@@ -1,16 +1,11 @@
 ﻿using Autofac;
 using Autofac.Integration.Mvc;
 using Bootstrap;
-using Disconf.Net.Application.Api.Zookeeper;
 using Disconf.Net.Application.Implementation;
 using Disconf.Net.Application.Interfaces;
 using Disconf.Net.Domain.Repositories;
 using Disconf.Net.Repositories;
 using Disconf.Net.Repositories.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Disconf.Net.Web.App_Start

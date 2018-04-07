@@ -56,7 +56,7 @@
                 this.$http.get('/App/Delete?Id=' + id, function (data, status, request) {
                     if (data.IsSuccess) {
                         alert("删除成功");
-                        location.reload();  
+                        location.reload();
                     } else {
                         alert(data.ErrorMsg);
                     }

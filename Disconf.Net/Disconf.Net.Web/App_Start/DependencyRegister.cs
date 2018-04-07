@@ -25,7 +25,7 @@ namespace Disconf.Net.Web.App_Start
             // Register your Web API controllers.
             builder.RegisterApiControllers(typeof(MvcApplication).Assembly);
 
-            var connectionString = WebConfigurationManager.ConnectionStrings["DefaultConnectionString"].ConnectionString;
+            var connectionString = WebConfigurationManager.ConnectionStrings["DisconfConnectionString"].ConnectionString;
             builder.RegisterAssemblyTypes(typeof(BaseRepository).Assembly)
                 .Where(t => t.IsSubclassOf(typeof(BaseRepository)))
                 .AsImplementedInterfaces()

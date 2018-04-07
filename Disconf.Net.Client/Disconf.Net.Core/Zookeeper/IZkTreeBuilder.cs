@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Disconf.Net.Core.Zookeeper
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public interface IZkTreeBuilder
     {
         /// <summary>

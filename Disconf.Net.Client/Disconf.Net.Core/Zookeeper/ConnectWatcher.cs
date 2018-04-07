@@ -1,11 +1,7 @@
 ﻿using Disconf.Net.Core.Utils;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using ZooKeeperNet;
+using ZooKeeper.Net;
 
 namespace Disconf.Net.Core.Zookeeper
 {
@@ -14,23 +10,27 @@ namespace Disconf.Net.Core.Zookeeper
     /// </summary>
     public class ConnectWatcher : IWatcher, IDisposable
     {
-        private string _connectionString;
+        CountDownLatch latch;
         private int _sessionTimeOut;
+        private string _connectionString;
+        static object lockObj = new object();
+
         /// <summary>
         /// 因为程序不可能无限等待，所以需要设置等待zookeeper连接超时的时间，单位毫秒
         /// 至于zookeeper客户端自身实际似乎是会进行无限制连接尝试的
         /// </summary>
         private int _connectTimeOut = 3000;
+
         /// <summary>
         /// 重连时的时间间隔，单位毫秒
         /// </summary>
         private int _retryIntervalMillisecond = 3000;
-        CountDownLatch latch;
 
         /// <summary>
         /// 该Watcher监控的zookeeper客户端
         /// </summary>
-        public ZooKeeper ZooKeeper { get; private set; }
+        public ZooKeeper.Net.ZooKeeper ZooKeeper { get; private set; }
+
         /// <summary>
         /// 用于监控连接的Zookeeper Watcher
         /// </summary>
@@ -42,6 +42,11 @@ namespace Disconf.Net.Core.Zookeeper
             this._sessionTimeOut = timeOut;
             this.Connect();
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="event"></param>
         public virtual void Process(WatchedEvent @event)
         {
             switch (@event.State)
@@ -57,20 +62,27 @@ namespace Disconf.Net.Core.Zookeeper
                     break;
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
         private void Connect()
         {
             latch = new CountDownLatch(1);
-            this.ZooKeeper = new ZooKeeper(this._connectionString, TimeSpan.FromMilliseconds(this._sessionTimeOut), this);
+            this.ZooKeeper = new ZooKeeper.Net.ZooKeeper(this._connectionString, TimeSpan.FromMilliseconds(this._sessionTimeOut), this);
             try
             {
                 latch.Await(this._connectTimeOut);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //Connect TimeOut
             }
         }
-        static object lockObj = new object();
+
+        /// <summary>
+        /// 
+        /// </summary>
         internal void ReConnect()
         {
             lock (lockObj)
@@ -79,8 +91,7 @@ namespace Disconf.Net.Core.Zookeeper
                 {
                     try
                     {
-                        if (this.ZooKeeper != null
-                            && !ZooKeeper.States.CLOSED.Equals(this.ZooKeeper.State))
+                        if (this.ZooKeeper != null && !States.CLOSED.Equals(this.ZooKeeper.State))
                         {
                             break;
                         }
@@ -96,10 +107,16 @@ namespace Disconf.Net.Core.Zookeeper
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         protected virtual void ReConnectCallBack()
         {
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Dispose()
         {
             if (this.ZooKeeper != null)

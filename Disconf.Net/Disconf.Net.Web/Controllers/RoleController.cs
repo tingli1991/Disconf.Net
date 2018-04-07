@@ -3,11 +3,8 @@ using Disconf.Net.Domain.Condition;
 using Disconf.Net.Domain.Enum;
 using Disconf.Net.Domain.Models;
 using Disconf.Net.Model.Result;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Disconf.Net.Web.Controllers
@@ -16,24 +13,50 @@ namespace Disconf.Net.Web.Controllers
     {
         private readonly IRoleService _roleService;
         private readonly IPermissionService _permissionService;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="roleService"></param>
+        /// <param name="permissionService"></param>
         public RoleController(IRoleService roleService, IPermissionService permissionService)
         {
             _roleService = roleService;
             _permissionService = permissionService;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             return View();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Edit()
         {
             return View();
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Add()
         {
             return View();
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<JsonResult> Get(long id)
         {
             var model = await _roleService.Get(id);
@@ -44,6 +67,12 @@ namespace Disconf.Net.Web.Controllers
             };
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public async Task<JsonResult> Insert(Role model)
         {
             var result = new BaseResult();
@@ -62,6 +91,11 @@ namespace Disconf.Net.Web.Controllers
             }
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public async Task<JsonResult> GetRoleList()
         {
             var user = (User)Session["User"];
@@ -74,6 +108,10 @@ namespace Disconf.Net.Web.Controllers
             return Json(list.Where(s => s.Id > 1), JsonRequestBehavior.AllowGet);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public async Task<JsonResult> GetList()
         {
             var user = (User)Session["User"];
@@ -86,6 +124,11 @@ namespace Disconf.Net.Web.Controllers
             return Json(user.Id == 1 ? list : list.Where(s => s.Id > 1), JsonRequestBehavior.AllowGet);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public async Task<JsonResult> Update(Role model)
         {
             var result = new BaseResult();
@@ -106,25 +149,38 @@ namespace Disconf.Net.Web.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<ActionResult> Delete(long id)
         {
             await _roleService.Delete(id);
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public async Task<ActionResult> GetPerList()
         {
             var user = (User)Session["User"];
             var list = await _permissionService.GetList();
             var role = await _roleService.Get(user.RoleId);
-            var vmList = list.Where(s => s.PermissionType == (int)PermissionType.App && (role.PermissionIds.Split('|').Contains(s.Id.ToString()) || role.CreateId == 0)).Select(s => new
+
+            var permissionType = (int)PermissionType.App;
+            var permissionIds = role.PermissionIds.Split('|').Select(e => long.Parse(e)).ToArray();//权限Id列表
+            var permissionList = list.Where(s => s.PermissionType == permissionType && (permissionIds.Contains(s.Id) || role.CreateId == 0)).ToList();//权限列表
+            var vmList = permissionList.Select(s => new
             {
-                Name = s.Name,
                 Id = s.Id,
+                Name = s.Name,
                 Children = list.Where(t => t.ParentId == s.Id).Select(f => new
                 {
-                    Name = f.Name,
                     Id = f.Id,
+                    Name = f.Name,
                     ParentId = f.ParentId
                 }).ToList()
             });

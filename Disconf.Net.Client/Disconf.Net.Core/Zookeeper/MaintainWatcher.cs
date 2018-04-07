@@ -1,12 +1,10 @@
 ﻿using Disconf.Net.Core.Utils;
 using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using ZooKeeperNet;
+using ZooKeeper.Net;
 
 namespace Disconf.Net.Core.Zookeeper
 {
@@ -15,11 +13,16 @@ namespace Disconf.Net.Core.Zookeeper
     /// </summary>
     public class MaintainWatcher : ConnectWatcher
     {
-        readonly ConcurrentQueue<Action> _queue = new ConcurrentQueue<Action>();
         /// <summary>
         /// 重试时间间隔
         /// </summary>
         const int RetryIntervalMillisecond = 1000;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        readonly ConcurrentQueue<Action> _queue = new ConcurrentQueue<Action>();
+
         /// <summary>
         /// znode设置类
         /// </summary>
@@ -30,6 +33,12 @@ namespace Disconf.Net.Core.Zookeeper
         {
             Task.Run(() => Execute());
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="zkPath"></param>
+        /// <param name="data"></param>
         public void AddOrSetData(string zkPath, byte[] data)
         {
             this._queue.Enqueue(() =>
@@ -92,7 +101,7 @@ namespace Disconf.Net.Core.Zookeeper
             {
                 action();
             }
-            catch (KeeperException ex)
+            catch (ZooKeeper.Net.KeeperException ex)
             {
                 return false;
             }

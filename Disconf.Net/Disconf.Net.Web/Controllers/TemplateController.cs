@@ -1,21 +1,17 @@
 ﻿using Disconf.Net.Application.Interfaces;
+using Disconf.Net.Core.Model;
 using Disconf.Net.Domain.Condition;
 using Disconf.Net.Domain.Models;
+using Disconf.Net.Infrastructure.Helper;
 using Disconf.Net.Model.Result;
+using Disconf.Net.Model.ViewModel;
+using Disconf.Net.Web.Filters;
+using Disconf.Net.Web.Models;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
-using Disconf.Net.Web.Filters;
-using Disconf.Net.Model.ViewModel;
-using System.IO.Compression;
-using Disconf.Net.Infrastructure.Helper;
-using Disconf.Net.Core.Model;
-using Disconf.Net.Web.Models;
 
 namespace Disconf.Net.Web.Controllers
 {

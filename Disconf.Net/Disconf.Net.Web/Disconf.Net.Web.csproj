@@ -328,8 +328,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Configs\ConnectionStrings.config">
+    <Content Include="Configs\connectionStrings.config">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Uploader\LICENSE" />
     <Content Include="Content\fonts\fontawesome-webfont.eot" />
@@ -337,6 +338,13 @@
     <Content Include="Content\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\fonts\fontawesome-webfont.woff2" />
     <Content Include="Content\fonts\FontAwesome.otf" />
+    <Content Include="Configs\appSettings.config">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configs\log4net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Properties\PublishProfiles\www.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\common.js" />
@@ -406,9 +414,17 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Disconf.Net.Client\Disconf.Net.Client\Disconf.Net.Client.csproj">
+      <Project>{e65d4ec3-b0b2-4854-bdd1-0aa57f459340}</Project>
+      <Name>Disconf.Net.Client</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Disconf.Net.Client\Disconf.Net.Core\Disconf.Net.Core.csproj">
       <Project>{f08853ff-4f87-468e-a06a-68e4ce0e3da3}</Project>
       <Name>Disconf.Net.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Disconf.Net.Client\ZooKeeper.Net\ZooKeeper.Net.csproj">
+      <Project>{6d370b1a-8bcf-434b-93aa-44ce5adc9a5d}</Project>
+      <Name>ZooKeeper.Net</Name>
     </ProjectReference>
     <ProjectReference Include="..\Disconf.Net.Application\Disconf.Net.Application.csproj">
       <Project>{9e5e62c4-bc57-4593-9428-f0946dbcbb89}</Project>

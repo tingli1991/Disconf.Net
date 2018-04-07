@@ -1,14 +1,12 @@
-﻿using Disconf.Net.Application.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DapperExtensions;
+using Disconf.Net.Application.Interfaces;
+using Disconf.Net.Domain.Condition;
 using Disconf.Net.Domain.Models;
 using Disconf.Net.Domain.Repositories;
-using DapperExtensions;
 using Disconf.Net.Infrastructure.Helper;
-using Disconf.Net.Domain.Condition;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Disconf.Net.Application.Implementation
 {
@@ -31,26 +29,50 @@ namespace Disconf.Net.Application.Implementation
             return await _userRepository.GetById<User>(id);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<User>> GetList()
         {
             return await _userRepository.GetList<User>();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public async Task<bool> Insert(User model)
         {
             return await _userRepository.Insert<User>(model);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public async Task<bool> Update(User model)
         {
             return await _userRepository.Update<User>(model);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public async Task<User> Login(User model)
         {
-            var user = await GetUserByUserName(model);
-            return user;
+            return await GetUserByUserName(model);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public async Task<User> GetUserByUserName(User model)
         {
             var pg = new PredicateGroup { Operator = GroupOperator.And, Predicates = new List<IPredicate>() };
@@ -61,6 +83,11 @@ namespace Disconf.Net.Application.Implementation
             return user;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         public async Task<IEnumerable<User>> GetUserList(long userId)
         {
             var condition = new RoleCondition

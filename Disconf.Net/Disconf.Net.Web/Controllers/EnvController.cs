@@ -1,14 +1,11 @@
 ﻿using Disconf.Net.Application.Interfaces;
+using Disconf.Net.Domain.Enum;
 using Disconf.Net.Domain.Models;
 using Disconf.Net.Model.Result;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
-using Disconf.Net.Web.Filters;
-using Disconf.Net.Domain.Enum;
 
 namespace Disconf.Net.Web.Controllers
 {

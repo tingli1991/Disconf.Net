@@ -1,16 +1,25 @@
 ﻿using Org.Apache.Zookeeper.Data;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ZooKeeperNet;
+using ZooKeeper.Net;
 
 namespace Disconf.Net.Core.Utils
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static class ZookeeperHelper
     {
-        public static string CreateWithPath(this ZooKeeper zk, string path, byte[] data, IEnumerable<ACL> acl, CreateMode createMode)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="zk"></param>
+        /// <param name="path"></param>
+        /// <param name="data"></param>
+        /// <param name="acl"></param>
+        /// <param name="createMode"></param>
+        /// <returns></returns>
+        public static string CreateWithPath(this ZooKeeper.Net.ZooKeeper zk, string path, byte[] data, IEnumerable<ACL> acl, CreateMode createMode)
         {
             var tmp = path.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
             if (path.Length > 1)

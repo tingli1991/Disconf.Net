@@ -1,19 +1,29 @@
 ﻿using Disconf.Net.Domain.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Disconf.Net.Application.Api.App
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class AppApiService : IAppApiService
     {
         private readonly IAppRepository _appRepository;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="appRepository"></param>
         public AppApiService(IAppRepository appRepository)
         {
             this._appRepository = appRepository;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         public async Task<ResponseWrapper<AppResponse>> GetAppIdByName(AppRequest request)
         {
 
