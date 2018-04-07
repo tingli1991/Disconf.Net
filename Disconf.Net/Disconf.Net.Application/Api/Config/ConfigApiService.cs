@@ -1,28 +1,37 @@
-﻿using DapperExtensions;
-using Disconf.Net.Application.Interfaces;
-using Disconf.Net.Core.Model;
-using Disconf.Net.Domain.Models;
+﻿using Disconf.Net.Domain.Models;
 using Disconf.Net.Domain.Repositories;
 using Disconf.Net.Infrastructure;
-using Disconf.Net.Infrastructure.Helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Caching;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Disconf.Net.Application.Api.Config
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class ConfigApiService : IConfigApiService
     {
-        private readonly IConfigRepository _configRepository;
         private readonly IAppRepository _appRepository;
+        private readonly IConfigRepository _configRepository;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="configRepository"></param>
+        /// <param name="appRepository"></param>
         public ConfigApiService(IConfigRepository configRepository, IAppRepository appRepository)
         {
-            this._configRepository = configRepository;
             this._appRepository = appRepository;
+            this._configRepository = configRepository;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         public async Task<ResponseWrapper<ConfigResponse>> GetConfigLastTime(ConfigRequest request)
         {
             var response = new ResponseWrapper<ConfigResponse>();

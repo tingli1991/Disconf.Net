@@ -1,22 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Http;
+﻿using Autofac;
 using Autofac.Extras.DynamicProxy2;
 using Autofac.Integration.WebApi;
-using Autofac;
-using System.Web.Configuration;
-using Disconf.Net.Repositories;
 using Disconf.Net.Application;
 using Disconf.Net.Application.Api;
-using Disconf.Net.Application.Interfaces;
-using Disconf.Net.Application.Implementation;
-using Disconf.Net.Repositories.Repository;
-using Disconf.Net.Domain.Repositories;
+using Disconf.Net.Repositories;
+using System.Linq;
+using System.Web.Configuration;
+using System.Web.Http;
 
 namespace Disconf.Net.Web.App_Start
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class DependencyRegister
     {
         public static void Register(HttpConfiguration config)

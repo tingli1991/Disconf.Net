@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Disconf.Net.Application</RootNamespace>
     <AssemblyName>Disconf.Net.Application</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,9 +31,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DapperExtensions, Version=1.4.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\DapperExtensions.1.4.4\lib\net40\DapperExtensions.dll</HintPath>
+    <Reference Include="AutoMapper, Version=6.2.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.2.2\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Dapper, Version=1.50.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.50.4\lib\net451\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="DapperExtensions, Version=1.6.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DapperExtensions.1.6.3\lib\net45\DapperExtensions.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -82,12 +88,21 @@
     <Compile Include="ResponseWrapper.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Disconf.Net.Core\Disconf.Net.Core.csproj">
+    <ProjectReference Include="..\..\Disconf.Net.Client\Disconf.Net.Client\Disconf.Net.Client.csproj">
+      <Project>{e65d4ec3-b0b2-4854-bdd1-0aa57f459340}</Project>
+      <Name>Disconf.Net.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Disconf.Net.Client\Disconf.Net.Core\Disconf.Net.Core.csproj">
       <Project>{f08853ff-4f87-468e-a06a-68e4ce0e3da3}</Project>
       <Name>Disconf.Net.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Disconf.Net.Client\ZooKeeper.Net\ZooKeeper.Net.csproj">
+      <Project>{6d370b1a-8bcf-434b-93aa-44ce5adc9a5d}</Project>
+      <Name>ZooKeeper.Net</Name>
     </ProjectReference>
     <ProjectReference Include="..\Disconf.Net.Domain\Disconf.Net.Domain.csproj">
       <Project>{4C522FD9-9E4D-4636-8735-8A683A72FDF2}</Project>

@@ -1,0 +1,15 @@
+C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\Disconf.Net.Client\bin\Debug\Disconf.Net.Client.dll
+C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\Disconf.Net.Client\bin\Debug\Disconf.Net.Client.pdb
+C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\Disconf.Net.Client\bin\Debug\Disconf.Net.Core.dll
+C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\Disconf.Net.Client\bin\Debug\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.dll
+C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\Disconf.Net.Client\bin\Debug\Newtonsoft.Json.dll
+C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\Disconf.Net.Client\bin\Debug\RestSharp.dll
+C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\Disconf.Net.Client\bin\Debug\System.ValueTuple.dll
+C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\Disconf.Net.Client\bin\Debug\ZooKeeperNet.dll
+C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\Disconf.Net.Client\bin\Debug\Disconf.Net.Core.pdb
+C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\Disconf.Net.Client\bin\Debug\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.xml
+C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\Disconf.Net.Client\bin\Debug\Newtonsoft.Json.xml
+C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\Disconf.Net.Client\bin\Debug\System.ValueTuple.xml
+C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\Disconf.Net.Client\obj\Debug\Disconf.Net.Client.csprojResolveAssemblyReference.cache
+C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\Disconf.Net.Client\obj\Debug\Disconf.Net.Client.dll
+C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\Disconf.Net.Client\obj\Debug\Disconf.Net.Client.pdb

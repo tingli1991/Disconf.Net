@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Disconf.Net.ConsoleTest</RootNamespace>
     <AssemblyName>Disconf.Net.ConsoleTest</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -62,6 +63,10 @@
     <ProjectReference Include="..\Disconf.Net.Client\Disconf.Net.Client.csproj">
       <Project>{e65d4ec3-b0b2-4854-bdd1-0aa57f459340}</Project>
       <Name>Disconf.Net.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Disconf.Net.Core\Disconf.Net.Core.csproj">
+      <Project>{f08853ff-4f87-468e-a06a-68e4ce0e3da3}</Project>
+      <Name>Disconf.Net.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
