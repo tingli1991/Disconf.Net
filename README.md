@@ -8,4 +8,5 @@ Disconf的.net版，含配置管理平台及客户端
 系统参考了百度的Disconf，实现和改进了部分功能，是Disconf的.Net精简版，功能有待进一步完善。
  
 详细介绍请点击链接
+
 http://www.cnblogs.com/qkbao/p/6638721.html
