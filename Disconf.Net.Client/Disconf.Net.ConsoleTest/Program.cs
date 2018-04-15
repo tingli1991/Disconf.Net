@@ -1,15 +1,21 @@
-﻿using Disconf.Net.Client;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 
 namespace Disconf.Net.ConsoleTest
 {
-    class Program
+    /// <summary>
+    /// 
+    /// </summary>
+    public class Program
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public static string Person { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
             DisConfigRules.Register();

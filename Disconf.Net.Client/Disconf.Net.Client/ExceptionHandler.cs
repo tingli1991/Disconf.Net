@@ -1,15 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Disconf.Net.Client
 {
+    /// <summary>
+    /// 执行处理类
+    /// </summary>
     internal class ExceptionHandler
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public event Action<string, Exception> Faulted;
-        public void Execute(Action action, string errorMsg = null)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="configName"></param>
+        /// <param name="action"></param>
+        public void Execute(string configName, Action action)
         {
             try
             {
@@ -17,11 +25,12 @@ namespace Disconf.Net.Client
             }
             catch (Exception ex)
             {
-                if (this.Faulted != null)
+                if (Faulted != null)
                 {
                     try
-                    {//防止事件方法内部错误导致程序报错
-                        this.Faulted(errorMsg, ex);
+                    {
+                        //防止事件方法内部错误导致程序报错
+                        Faulted(configName, ex);
                     }
                     catch { }
                 }

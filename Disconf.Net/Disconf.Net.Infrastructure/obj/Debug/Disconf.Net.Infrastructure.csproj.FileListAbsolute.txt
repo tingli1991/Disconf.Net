@@ -11,4 +11,3 @@ C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net\Disconf.Net.Infrastructu
 C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net\Disconf.Net.Infrastructure\bin\Debug\System.Web.Http.WebHost.xml
 C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net\Disconf.Net.Infrastructure\obj\Debug\Disconf.Net.Infrastructure.dll
 C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net\Disconf.Net.Infrastructure\obj\Debug\Disconf.Net.Infrastructure.pdb
-C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net\Disconf.Net.Infrastructure\obj\Debug\Disconf.Net.Infrastructure.csprojResolveAssemblyReference.cache

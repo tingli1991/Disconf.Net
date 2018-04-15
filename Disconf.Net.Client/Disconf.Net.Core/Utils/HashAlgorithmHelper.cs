@@ -1,20 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Disconf.Net.Core.Utils
 {
-    public class HashAlgorithmHelper<T>
-        where T : HashAlgorithm, new()
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public class HashAlgorithmHelper<T> where T : HashAlgorithm, new()
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="originalText"></param>
+        /// <param name="upper"></param>
+        /// <returns></returns>
         public static string ComputeHash(string originalText, bool upper = true)
         {
             return ComputeHash(Encoding.UTF8.GetBytes(originalText), upper);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="upper"></param>
+        /// <returns></returns>
         public static string ComputeHash(byte[] data, bool upper = true)
         {
             using (T algorithm = new T())

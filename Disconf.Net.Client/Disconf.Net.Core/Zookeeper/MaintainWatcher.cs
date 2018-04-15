@@ -1,7 +1,6 @@
 ﻿using Disconf.Net.Core.Utils;
 using System;
 using System.Collections.Concurrent;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using ZooKeeper.Net;
@@ -35,58 +34,52 @@ namespace Disconf.Net.Core.Zookeeper
         }
 
         /// <summary>
-        /// 
+        /// 添加或者设置data
         /// </summary>
         /// <param name="zkPath"></param>
         /// <param name="data"></param>
         public void AddOrSetData(string zkPath, byte[] data)
         {
-            this._queue.Enqueue(() =>
+            _queue.Enqueue(() =>
             {
-                var stat = this.ZooKeeper.Exists(zkPath, false);
+                var stat = ZooKeeper.Exists(zkPath, false);
                 if (stat != null)
                 {
-                    this.RemoveTmpChildNode(zkPath);//先删除子节点，再更新值保证不会出现客户端已经更新完并新增了节点，而服务端还没删完的情况
-                    this.ZooKeeper.SetData(zkPath, data, -1);
+                    //先删除子节点，再更新值保证不会出现客户端已经更新完并新增了节点，而服务端还没删完的情况
+                    ZooKeeper.RemoveTmpChildNode(zkPath);
+                    ZooKeeper.SetData(zkPath, data, -1);
                 }
                 else
                 {
-                    this.ZooKeeper.CreateWithPath(zkPath, data, Ids.OPEN_ACL_UNSAFE, CreateMode.Persistent);
+                    ZooKeeper.CreateWithPath(zkPath, data, Ids.OPEN_ACL_UNSAFE, CreateMode.Persistent);
                 }
             });
         }
+
         /// <summary>
-        /// 移除临时子节点，表明该节点目前已更新，客户端需要重新下载
+        /// 
         /// </summary>
-        /// <param name="path"></param>
-        private void RemoveTmpChildNode(string path)
-        {
-            var childs = this.ZooKeeper.GetChildren(path, false);
-            if (childs != null && childs.Any())
-            {
-                foreach (var child in childs)
-                {
-                    this.ZooKeeper.Delete(string.Format("{0}/{1}", path, child), -1);
-                }
-            }
-        }
+        /// <param name="zkPath"></param>
         public void Remove(string zkPath)
         {
-            this._queue.Enqueue(() =>
+            _queue.Enqueue(() =>
             {
-                this.RemoveTmpChildNode(zkPath);//zookeeper在存在子节点时，不允许直接删除父节点，所以需要先删除子节点
-                this.ZooKeeper.Delete(zkPath, -1);
+                //zookeeper在存在子节点时，不允许直接删除父节点，所以需要先删除子节点
+                ZooKeeper.RemoveTmpChildNode(zkPath);
+                ZooKeeper.Delete(zkPath, -1);
             });
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
         private void Execute()
         {
             while (true)
             {
-                Action act;
-                if (this._queue.TryPeek(out act)
-                    && this.Execute(act))
+                if (_queue.TryPeek(out Action act) && Execute(act))
                 {
-                    while (!this._queue.TryDequeue(out act))
+                    while (!_queue.TryDequeue(out act))
                     {
                         //do nothing
                     }
@@ -95,17 +88,23 @@ namespace Disconf.Net.Core.Zookeeper
                 Thread.Sleep(RetryIntervalMillisecond);
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="action"></param>
+        /// <returns></returns>
         private bool Execute(Action action)
         {
             try
             {
                 action();
             }
-            catch (ZooKeeper.Net.KeeperException ex)
+            catch (KeeperException)
             {
                 return false;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //TODO: 非zk错误，记录日志
             }

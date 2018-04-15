@@ -1,0 +1,136 @@
+[ERROR] 2018-04-14 15:08:36,549 Disconf.Net.Web.Controllers.HomeController - 【用户登陆】用户：admin登陆发生异常：
+System.ArgumentNullException: 值不能为 null。
+参数名: source
+   在 System.Linq.Enumerable.Any[TSource](IEnumerable`1 source)
+   在 Disconf.Net.Application.Implementation.UserServiceImpl.<GetUserByUserName>d__9.MoveNext() 位置 C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net\Disconf.Net.Application\Implementation\UserServiceImpl.cs:行号 82
+--- 引发异常的上一位置中堆栈跟踪的末尾 ---
+   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   在 Disconf.Net.Application.Implementation.UserServiceImpl.<Login>d__8.MoveNext() 位置 C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net\Disconf.Net.Application\Implementation\UserServiceImpl.cs:行号 68
+--- 引发异常的上一位置中堆栈跟踪的末尾 ---
+   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   在 Disconf.Net.Web.Controllers.HomeController.<UserLogin>d__4.MoveNext() 位置 C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net\Disconf.Net.Web\Controllers\HomeController.cs:行号 47
+[ERROR] 2018-04-14 15:12:59,151 Disconf.Net.Web.Controllers.HomeController - 【用户登陆】用户：admin登陆发生异常：
+System.ArgumentNullException: 值不能为 null。
+参数名: source
+   在 System.Linq.Enumerable.Any[TSource](IEnumerable`1 source)
+   在 Disconf.Net.Application.Implementation.UserServiceImpl.<GetUserByUserName>d__9.MoveNext() 位置 C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net\Disconf.Net.Application\Implementation\UserServiceImpl.cs:行号 82
+--- 引发异常的上一位置中堆栈跟踪的末尾 ---
+   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   在 Disconf.Net.Application.Implementation.UserServiceImpl.<Login>d__8.MoveNext() 位置 C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net\Disconf.Net.Application\Implementation\UserServiceImpl.cs:行号 68
+--- 引发异常的上一位置中堆栈跟踪的末尾 ---
+   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   在 Disconf.Net.Web.Controllers.HomeController.<UserLogin>d__4.MoveNext() 位置 C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net\Disconf.Net.Web\Controllers\HomeController.cs:行号 47
+[ERROR] 2018-04-14 15:15:28,124 Disconf.Net.Web.Controllers.HomeController - 【用户登陆】用户：admin登陆发生异常：
+System.ArgumentNullException: 值不能为 null。
+参数名: source
+   在 System.Linq.Enumerable.Any[TSource](IEnumerable`1 source)
+   在 Disconf.Net.Application.Implementation.UserServiceImpl.<GetUserByUserName>d__9.MoveNext() 位置 C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net\Disconf.Net.Application\Implementation\UserServiceImpl.cs:行号 82
+--- 引发异常的上一位置中堆栈跟踪的末尾 ---
+   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   在 Disconf.Net.Application.Implementation.UserServiceImpl.<Login>d__8.MoveNext() 位置 C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net\Disconf.Net.Application\Implementation\UserServiceImpl.cs:行号 68
+--- 引发异常的上一位置中堆栈跟踪的末尾 ---
+   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   在 Disconf.Net.Web.Controllers.HomeController.<UserLogin>d__4.MoveNext() 位置 C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net\Disconf.Net.Web\Controllers\HomeController.cs:行号 47
+[INFO] 2018-04-14 18:03:25,467 ZooKeeper.Net.ZooKeeper - Initiating client connection, connectstring=192.168.3.11:2181 sessionTimeout=00:00:10 watcher=Disconf.Net.Core.Zookeeper.MaintainWatcher
+[INFO] 2018-04-14 18:03:25,511 ZooKeeper.Net.ClientConnectionRequestProducer - Opening socket connection to server 192.168.3.11:2181
+[WARN] 2018-04-14 18:03:26,129 ZooKeeper.Net.ClientConnectionRequestProducer - Failed to connect to 192.168.3.11:2181.
+[INFO] 2018-04-14 18:03:26,151 ZooKeeper.Net.ClientConnectionRequestProducer - Opening socket connection to server 192.168.3.11:2181
+[WARN] 2018-04-14 18:03:26,662 ZooKeeper.Net.ClientConnectionRequestProducer - Failed to connect to 192.168.3.11:2181.
+[INFO] 2018-04-14 18:03:26,699 ZooKeeper.Net.ClientConnectionRequestProducer - Session 0x0 for server , unexpected error, closing socket connection and attempting reconnect, detail:引发类型为“ZooKeeper.Net.KeeperException+ConnectionLossException”的异常。-   在 ZooKeeper.Net.ClientConnectionRequestProducer.StartConnect() 位置 C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\ZooKeeper.Net\Client\ClientConnectionRequestProducer.cs:行号 393
+   在 ZooKeeper.Net.ClientConnectionRequestProducer.SendRequests() 位置 C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\ZooKeeper.Net\Client\ClientConnectionRequestProducer.cs:行号 179
+[INFO] 2018-04-14 18:03:27,744 ZooKeeper.Net.ClientConnectionRequestProducer - Opening socket connection to server 192.168.3.11:2181
+[WARN] 2018-04-14 18:03:28,253 ZooKeeper.Net.ClientConnectionRequestProducer - Failed to connect to 192.168.3.11:2181.
+[INFO] 2018-04-14 18:03:28,262 ZooKeeper.Net.ClientConnectionRequestProducer - Session 0x0 for server , unexpected error, closing socket connection and attempting reconnect, detail:引发类型为“ZooKeeper.Net.KeeperException+ConnectionLossException”的异常。-   在 ZooKeeper.Net.ClientConnectionRequestProducer.StartConnect() 位置 C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\ZooKeeper.Net\Client\ClientConnectionRequestProducer.cs:行号 393
+   在 ZooKeeper.Net.ClientConnectionRequestProducer.SendRequests() 位置 C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\ZooKeeper.Net\Client\ClientConnectionRequestProducer.cs:行号 179
+[INFO] 2018-04-14 18:04:09,300 ZooKeeper.Net.ClientConnectionRequestProducer - Opening socket connection to server 192.168.3.11:2181
+[WARN] 2018-04-14 18:04:09,828 ZooKeeper.Net.ClientConnectionRequestProducer - Failed to connect to 192.168.3.11:2181.
+[INFO] 2018-04-14 18:04:09,861 ZooKeeper.Net.ClientConnectionRequestProducer - Session 0x0 for server , unexpected error, closing socket connection and attempting reconnect, detail:引发类型为“ZooKeeper.Net.KeeperException+ConnectionLossException”的异常。-   在 ZooKeeper.Net.ClientConnectionRequestProducer.StartConnect() 位置 C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\ZooKeeper.Net\Client\ClientConnectionRequestProducer.cs:行号 393
+   在 ZooKeeper.Net.ClientConnectionRequestProducer.SendRequests() 位置 C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\ZooKeeper.Net\Client\ClientConnectionRequestProducer.cs:行号 179
+[INFO] 2018-04-14 18:06:51,731 ZooKeeper.Net.ZooKeeper - Initiating client connection, connectstring=192.168.3.11:2181 sessionTimeout=00:00:10 watcher=Disconf.Net.Core.Zookeeper.MaintainWatcher
+[INFO] 2018-04-14 18:06:51,764 ZooKeeper.Net.ClientConnectionRequestProducer - Opening socket connection to server 192.168.3.11:2181
+[WARN] 2018-04-14 18:06:52,288 ZooKeeper.Net.ClientConnectionRequestProducer - Failed to connect to 192.168.3.11:2181.
+[INFO] 2018-04-14 18:06:52,322 ZooKeeper.Net.ClientConnectionRequestProducer - Opening socket connection to server 192.168.3.11:2181
+[WARN] 2018-04-14 18:06:52,834 ZooKeeper.Net.ClientConnectionRequestProducer - Failed to connect to 192.168.3.11:2181.
+[INFO] 2018-04-14 18:06:52,862 ZooKeeper.Net.ClientConnectionRequestProducer - Session 0x0 for server , unexpected error, closing socket connection and attempting reconnect, detail:引发类型为“ZooKeeper.Net.KeeperException+ConnectionLossException”的异常。-   在 ZooKeeper.Net.ClientConnectionRequestProducer.StartConnect() 位置 C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\ZooKeeper.Net\Client\ClientConnectionRequestProducer.cs:行号 393
+   在 ZooKeeper.Net.ClientConnectionRequestProducer.SendRequests() 位置 C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\ZooKeeper.Net\Client\ClientConnectionRequestProducer.cs:行号 179
+[INFO] 2018-04-14 18:06:53,885 ZooKeeper.Net.ClientConnectionRequestProducer - Opening socket connection to server 192.168.3.11:2181
+[WARN] 2018-04-14 18:06:54,394 ZooKeeper.Net.ClientConnectionRequestProducer - Failed to connect to 192.168.3.11:2181.
+[INFO] 2018-04-14 18:06:54,403 ZooKeeper.Net.ClientConnectionRequestProducer - Session 0x0 for server , unexpected error, closing socket connection and attempting reconnect, detail:引发类型为“ZooKeeper.Net.KeeperException+ConnectionLossException”的异常。-   在 ZooKeeper.Net.ClientConnectionRequestProducer.StartConnect() 位置 C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\ZooKeeper.Net\Client\ClientConnectionRequestProducer.cs:行号 393
+   在 ZooKeeper.Net.ClientConnectionRequestProducer.SendRequests() 位置 C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\ZooKeeper.Net\Client\ClientConnectionRequestProducer.cs:行号 179
+[INFO] 2018-04-14 18:07:00,439 ZooKeeper.Net.ClientConnectionRequestProducer - Opening socket connection to server 192.168.3.11:2181
+[WARN] 2018-04-14 18:07:00,972 ZooKeeper.Net.ClientConnectionRequestProducer - Failed to connect to 192.168.3.11:2181.
+[INFO] 2018-04-14 18:07:01,002 ZooKeeper.Net.ClientConnectionRequestProducer - Session 0x0 for server , unexpected error, closing socket connection and attempting reconnect, detail:引发类型为“ZooKeeper.Net.KeeperException+ConnectionLossException”的异常。-   在 ZooKeeper.Net.ClientConnectionRequestProducer.StartConnect() 位置 C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\ZooKeeper.Net\Client\ClientConnectionRequestProducer.cs:行号 393
+   在 ZooKeeper.Net.ClientConnectionRequestProducer.SendRequests() 位置 C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\ZooKeeper.Net\Client\ClientConnectionRequestProducer.cs:行号 179
+[INFO] 2018-04-14 18:07:22,558 ZooKeeper.Net.ClientConnectionRequestProducer - Opening socket connection to server 192.168.3.11:2181
+[WARN] 2018-04-14 18:07:25,771 ZooKeeper.Net.ClientConnectionRequestProducer - Failed to connect to 192.168.3.11:2181.
+[INFO] 2018-04-14 18:07:25,809 ZooKeeper.Net.ClientConnectionRequestProducer - Session 0x0 for server , unexpected error, closing socket connection and attempting reconnect, detail:引发类型为“ZooKeeper.Net.KeeperException+ConnectionLossException”的异常。-   在 ZooKeeper.Net.ClientConnectionRequestProducer.StartConnect() 位置 C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\ZooKeeper.Net\Client\ClientConnectionRequestProducer.cs:行号 393
+   在 ZooKeeper.Net.ClientConnectionRequestProducer.SendRequests() 位置 C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\ZooKeeper.Net\Client\ClientConnectionRequestProducer.cs:行号 179
+[INFO] 2018-04-14 18:07:37,329 ZooKeeper.Net.ClientConnectionRequestProducer - Opening socket connection to server 192.168.3.11:2181
+[WARN] 2018-04-14 18:07:39,138 ZooKeeper.Net.ClientConnectionRequestProducer - Failed to connect to 192.168.3.11:2181.
+[INFO] 2018-04-14 18:07:39,169 ZooKeeper.Net.ClientConnectionRequestProducer - Session 0x0 for server , unexpected error, closing socket connection and attempting reconnect, detail:引发类型为“ZooKeeper.Net.KeeperException+ConnectionLossException”的异常。-   在 ZooKeeper.Net.ClientConnectionRequestProducer.StartConnect() 位置 C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\ZooKeeper.Net\Client\ClientConnectionRequestProducer.cs:行号 393
+   在 ZooKeeper.Net.ClientConnectionRequestProducer.SendRequests() 位置 C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\ZooKeeper.Net\Client\ClientConnectionRequestProducer.cs:行号 179
+[INFO] 2018-04-14 18:07:40,213 ZooKeeper.Net.ClientConnectionRequestProducer - Opening socket connection to server 192.168.3.11:2181
+[WARN] 2018-04-14 18:07:40,726 ZooKeeper.Net.ClientConnectionRequestProducer - Failed to connect to 192.168.3.11:2181.
+[INFO] 2018-04-14 18:07:40,748 ZooKeeper.Net.ClientConnectionRequestProducer - Session 0x0 for server , unexpected error, closing socket connection and attempting reconnect, detail:引发类型为“ZooKeeper.Net.KeeperException+ConnectionLossException”的异常。-   在 ZooKeeper.Net.ClientConnectionRequestProducer.StartConnect() 位置 C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\ZooKeeper.Net\Client\ClientConnectionRequestProducer.cs:行号 393
+   在 ZooKeeper.Net.ClientConnectionRequestProducer.SendRequests() 位置 C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\ZooKeeper.Net\Client\ClientConnectionRequestProducer.cs:行号 179
+[INFO] 2018-04-14 18:07:41,764 ZooKeeper.Net.ClientConnectionRequestProducer - Opening socket connection to server 192.168.3.11:2181
+[WARN] 2018-04-14 18:07:42,276 ZooKeeper.Net.ClientConnectionRequestProducer - Failed to connect to 192.168.3.11:2181.
+[INFO] 2018-04-14 18:07:42,287 ZooKeeper.Net.ClientConnectionRequestProducer - Session 0x0 for server , unexpected error, closing socket connection and attempting reconnect, detail:引发类型为“ZooKeeper.Net.KeeperException+ConnectionLossException”的异常。-   在 ZooKeeper.Net.ClientConnectionRequestProducer.StartConnect() 位置 C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\ZooKeeper.Net\Client\ClientConnectionRequestProducer.cs:行号 393
+   在 ZooKeeper.Net.ClientConnectionRequestProducer.SendRequests() 位置 C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\ZooKeeper.Net\Client\ClientConnectionRequestProducer.cs:行号 179
+[INFO] 2018-04-14 18:07:43,338 ZooKeeper.Net.ClientConnectionRequestProducer - Opening socket connection to server 192.168.3.11:2181
+[WARN] 2018-04-14 18:07:43,851 ZooKeeper.Net.ClientConnectionRequestProducer - Failed to connect to 192.168.3.11:2181.
+[INFO] 2018-04-14 18:07:43,865 ZooKeeper.Net.ClientConnectionRequestProducer - Session 0x0 for server , unexpected error, closing socket connection and attempting reconnect, detail:引发类型为“ZooKeeper.Net.KeeperException+ConnectionLossException”的异常。-   在 ZooKeeper.Net.ClientConnectionRequestProducer.StartConnect() 位置 C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\ZooKeeper.Net\Client\ClientConnectionRequestProducer.cs:行号 393
+   在 ZooKeeper.Net.ClientConnectionRequestProducer.SendRequests() 位置 C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\ZooKeeper.Net\Client\ClientConnectionRequestProducer.cs:行号 179
+[INFO] 2018-04-14 18:07:44,870 ZooKeeper.Net.ClientConnectionRequestProducer - Opening socket connection to server 192.168.3.11:2181
+[WARN] 2018-04-14 18:07:46,749 ZooKeeper.Net.ClientConnectionRequestProducer - Failed to connect to 192.168.3.11:2181.
+[INFO] 2018-04-14 18:07:46,763 ZooKeeper.Net.ClientConnectionRequestProducer - Session 0x0 for server , unexpected error, closing socket connection and attempting reconnect, detail:引发类型为“ZooKeeper.Net.KeeperException+ConnectionLossException”的异常。-   在 ZooKeeper.Net.ClientConnectionRequestProducer.StartConnect() 位置 C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\ZooKeeper.Net\Client\ClientConnectionRequestProducer.cs:行号 393
+   在 ZooKeeper.Net.ClientConnectionRequestProducer.SendRequests() 位置 C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\ZooKeeper.Net\Client\ClientConnectionRequestProducer.cs:行号 179
+[INFO] 2018-04-14 18:07:48,776 ZooKeeper.Net.ClientConnectionRequestProducer - Opening socket connection to server 192.168.3.11:2181
+[WARN] 2018-04-14 18:07:49,594 ZooKeeper.Net.ClientConnectionRequestProducer - Failed to connect to 192.168.3.11:2181.
+[INFO] 2018-04-14 18:07:49,608 ZooKeeper.Net.ClientConnectionRequestProducer - Session 0x0 for server , unexpected error, closing socket connection and attempting reconnect, detail:引发类型为“ZooKeeper.Net.KeeperException+ConnectionLossException”的异常。-   在 ZooKeeper.Net.ClientConnectionRequestProducer.StartConnect() 位置 C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\ZooKeeper.Net\Client\ClientConnectionRequestProducer.cs:行号 393
+   在 ZooKeeper.Net.ClientConnectionRequestProducer.SendRequests() 位置 C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\ZooKeeper.Net\Client\ClientConnectionRequestProducer.cs:行号 179
+[INFO] 2018-04-14 18:07:50,724 ZooKeeper.Net.ClientConnectionRequestProducer - Opening socket connection to server 192.168.3.11:2181
+[WARN] 2018-04-14 18:08:54,540 ZooKeeper.Net.ClientConnectionRequestProducer - Failed to connect to 192.168.3.11:2181.
+[INFO] 2018-04-14 18:09:04,288 ZooKeeper.Net.ClientConnectionRequestProducer - Session 0x0 for server , unexpected error, closing socket connection and attempting reconnect, detail:引发类型为“ZooKeeper.Net.KeeperException+ConnectionLossException”的异常。-   在 ZooKeeper.Net.ClientConnectionRequestProducer.StartConnect() 位置 C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\ZooKeeper.Net\Client\ClientConnectionRequestProducer.cs:行号 393
+   在 ZooKeeper.Net.ClientConnectionRequestProducer.SendRequests() 位置 C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\ZooKeeper.Net\Client\ClientConnectionRequestProducer.cs:行号 179
+[INFO] 2018-04-14 18:09:05,317 ZooKeeper.Net.ClientConnectionRequestProducer - Opening socket connection to server 192.168.3.11:2181
+[WARN] 2018-04-14 18:10:52,152 ZooKeeper.Net.ClientConnectionRequestProducer - Failed to connect to 192.168.3.11:2181.
+[INFO] 2018-04-14 18:10:52,944 ZooKeeper.Net.ClientConnectionRequestProducer - Session 0x0 for server , unexpected error, closing socket connection and attempting reconnect, detail:引发类型为“ZooKeeper.Net.KeeperException+ConnectionLossException”的异常。-   在 ZooKeeper.Net.ClientConnectionRequestProducer.StartConnect() 位置 C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\ZooKeeper.Net\Client\ClientConnectionRequestProducer.cs:行号 393
+   在 ZooKeeper.Net.ClientConnectionRequestProducer.SendRequests() 位置 C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\ZooKeeper.Net\Client\ClientConnectionRequestProducer.cs:行号 179
+[INFO] 2018-04-14 18:11:07,254 ZooKeeper.Net.ClientConnectionRequestProducer - Opening socket connection to server 192.168.3.11:2181
+[WARN] 2018-04-14 18:11:10,784 ZooKeeper.Net.ClientConnectionRequestProducer - Failed to connect to 192.168.3.11:2181.
+[INFO] 2018-04-14 18:11:18,709 ZooKeeper.Net.ClientConnectionRequestProducer - Session 0x0 for server , unexpected error, closing socket connection and attempting reconnect, detail:引发类型为“ZooKeeper.Net.KeeperException+ConnectionLossException”的异常。-   在 ZooKeeper.Net.ClientConnectionRequestProducer.StartConnect() 位置 C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\ZooKeeper.Net\Client\ClientConnectionRequestProducer.cs:行号 393
+   在 ZooKeeper.Net.ClientConnectionRequestProducer.SendRequests() 位置 C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\ZooKeeper.Net\Client\ClientConnectionRequestProducer.cs:行号 179
+[INFO] 2018-04-14 18:11:30,628 ZooKeeper.Net.ClientConnectionRequestProducer - Opening socket connection to server 192.168.3.11:2181
+[WARN] 2018-04-14 18:11:33,932 ZooKeeper.Net.ClientConnectionRequestProducer - Failed to connect to 192.168.3.11:2181.
+[INFO] 2018-04-14 18:11:36,611 ZooKeeper.Net.ClientConnectionRequestProducer - Session 0x0 for server , unexpected error, closing socket connection and attempting reconnect, detail:引发类型为“ZooKeeper.Net.KeeperException+ConnectionLossException”的异常。-   在 ZooKeeper.Net.ClientConnectionRequestProducer.StartConnect() 位置 C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\ZooKeeper.Net\Client\ClientConnectionRequestProducer.cs:行号 393
+   在 ZooKeeper.Net.ClientConnectionRequestProducer.SendRequests() 位置 C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\ZooKeeper.Net\Client\ClientConnectionRequestProducer.cs:行号 179
+[INFO] 2018-04-14 18:11:43,980 ZooKeeper.Net.ClientConnectionRequestProducer - Opening socket connection to server 192.168.3.11:2181
+[WARN] 2018-04-14 18:12:16,621 ZooKeeper.Net.ClientConnectionRequestProducer - Failed to connect to 192.168.3.11:2181.
+[INFO] 2018-04-14 18:12:16,668 ZooKeeper.Net.ClientConnectionRequestProducer - Session 0x0 for server , unexpected error, closing socket connection and attempting reconnect, detail:引发类型为“ZooKeeper.Net.KeeperException+ConnectionLossException”的异常。-   在 ZooKeeper.Net.ClientConnectionRequestProducer.StartConnect() 位置 C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\ZooKeeper.Net\Client\ClientConnectionRequestProducer.cs:行号 393
+   在 ZooKeeper.Net.ClientConnectionRequestProducer.SendRequests() 位置 C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\ZooKeeper.Net\Client\ClientConnectionRequestProducer.cs:行号 179
+[INFO] 2018-04-14 18:12:17,941 ZooKeeper.Net.ClientConnectionRequestProducer - Opening socket connection to server 192.168.3.11:2181
+[WARN] 2018-04-14 18:12:21,090 ZooKeeper.Net.ClientConnectionRequestProducer - Failed to connect to 192.168.3.11:2181.
+[INFO] 2018-04-14 18:12:22,548 ZooKeeper.Net.ClientConnectionRequestProducer - Session 0x0 for server , unexpected error, closing socket connection and attempting reconnect, detail:引发类型为“ZooKeeper.Net.KeeperException+ConnectionLossException”的异常。-   在 ZooKeeper.Net.ClientConnectionRequestProducer.StartConnect() 位置 C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\ZooKeeper.Net\Client\ClientConnectionRequestProducer.cs:行号 393
+   在 ZooKeeper.Net.ClientConnectionRequestProducer.SendRequests() 位置 C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\ZooKeeper.Net\Client\ClientConnectionRequestProducer.cs:行号 179
+[INFO] 2018-04-14 18:55:15,220 ZooKeeper.Net.ClientConnectionRequestProducer - Opening socket connection to server 192.168.3.11:2181
+[INFO] 2018-04-14 18:55:21,940 ZooKeeper.Net.ClientConnectionRequestProducer - Socket connection established to 192.168.3.11:2181, initiating session
+[DEBUG] 2018-04-14 18:55:22,581 ZooKeeper.Net.ClientConnectionRequestProducer - Session establishment request sent on 192.168.3.11:2181
+[INFO] 2018-04-14 18:55:25,014 ZooKeeper.Net.ClientConnectionRequestProducer - Session establishment complete on server 162C3C9E09A0001, negotiated timeout = 10000
+[DEBUG] 2018-04-14 18:55:25,109 ZooKeeper.Net.ClientConnectionRequestProducer - Reading reply sessionid:0x162C3C9E09A0001, packet::   clientPath:  serverPath:    finished:0     header::      replyHeader::                  request::   ^/HB.WebAPI/47CD76E43F74BBC2E1BAAF194D07E1FA/TEST/File/72B390C3BED2447E673EA4C377F91AC82538C604    response::                    bú??  bú??                                  
+[DEBUG] 2018-04-14 18:55:30,715 ZooKeeper.Net.ClientConnectionRequestProducer - Got ping response for sessionid: 0x162C3C9E09A0001 after 0ms
+[DEBUG] 2018-04-14 18:55:39,064 ZooKeeper.Net.ClientConnectionRequestProducer - Got ping response for sessionid: 0x162C3C9E09A0001 after 0ms
+[DEBUG] 2018-04-14 18:55:42,916 ZooKeeper.Net.ClientConnectionRequestProducer - Got ping response for sessionid: 0x162C3C9E09A0001 after 0ms
+[DEBUG] 2018-04-14 18:55:54,826 ZooKeeper.Net.ClientConnectionRequestProducer - TcpClient connection lost.

@@ -1,13 +1,11 @@
 ﻿using Disconf.Net.Client.Fetch;
 using Disconf.Net.Client.Rules;
 using Disconf.Net.Core.Zookeeper;
-using Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
@@ -18,35 +16,39 @@ namespace Disconf.Net.Client
     /// </summary>
     public class ConfigManager
     {
-        public readonly RuleCollection<FileRule> FileRules = new RuleCollection<FileRule>();
-        public readonly RuleCollection<ItemRule> ItemRules = new RuleCollection<ItemRule>();
-
-        public static readonly ConfigManager Instance = new ConfigManager();
-        /// <summary>
-        /// 更新异常时调用事件进行通知
-        /// </summary>
-        public event Action<Exception> Faulted;
-
-        private ClientConfigSection config = ClientConfigSection.Current;
         private NodeWatcher _fileWatcher;
         private NodeWatcher _itemWatcher;
         private ExceptionHandler _handler;
+        public event Action<Exception> Exception;//更新异常时调用事件进行通知
+        public event Action<string, string> NodeChanged;//节点更新完成事件通知
+        private ClientConfigSection config = ClientConfigSection.Current;
+        public static readonly ConfigManager Instance = new ConfigManager();
+        public readonly RuleCollection<FileRule> FileRules = new RuleCollection<FileRule>();
+        public readonly RuleCollection<ItemRule> ItemRules = new RuleCollection<ItemRule>();
 
+        /// <summary>
+        /// 构造函数
+        /// </summary>
         private ConfigManager()
         {
-            this._handler = new ExceptionHandler();
-            this._handler.Faulted += _handler_Faulted;
+            _handler = new ExceptionHandler();
+            _handler.Faulted += Handler_Faulted;
         }
 
-        private void _handler_Faulted(string arg1, Exception arg2)
+        /// <summary>
+        /// 处理失败事件执行方法
+        /// </summary>
+        /// <param name="configName"></param>
+        /// <param name="ex"></param>
+        private void Handler_Faulted(string configName, Exception ex)
         {
-            if (this.Faulted != null)
+            if (Exception != null)
             {
-                if (!string.IsNullOrWhiteSpace(arg1))
+                if (!string.IsNullOrWhiteSpace(configName))
                 {
-                    arg2 = new Exception(arg1, arg2);
+                    ex = new Exception(configName, ex);
                 }
-                this.Faulted(arg2);
+                Exception(ex);
             }
         }
 
@@ -57,107 +59,105 @@ namespace Disconf.Net.Client
         /// <param name="config"></param>
         public void Init()
         {
-            if (config.EnableRemote)
-            {
-                var task = Task.Run(() =>
-                {
-                    this._handler.Execute(() => this.GetAllConfigs(), string.Empty);
-                 });
-                if (config.UpdateStrategy.StartedSync)
-                {
-                    task.Wait();
-                }
-            }
+            if (!config.EnableRemote)
+                return;
+
+            var task = Task.Run(() => _handler.Execute(string.Empty, () => GetAllConfigs()));
+            if (!config.UpdateStrategy.StartedSync)
+                return;
+
+            //同步等待
+            task.Wait();
         }
 
+        /// <summary>
+        /// 获取所有配置信息
+        /// </summary>
         private void GetAllConfigs()
         {
+            string zkHosts = null;
+            bool downLoad = false;
             IEnumerable<string> files = null;
             IDictionary<string, string> items = null;
-            string zkHosts = null;
             var fetchManager = FetchManager.Instance;
-            Exception ex = null;
-            bool downLoad = false;
-            try
+            zkHosts = fetchManager.GetZookeeperHosts();
+            var ltimeFromLocal = GetLastChangedTimeFromLocalIfExist();
+            var ltimeFromServer = fetchManager.GetLastChangedTime();
+            if (ltimeFromLocal > DateTime.Now || ltimeFromLocal < ltimeFromServer)
             {
-                zkHosts = fetchManager.GetZookeeperHosts();
-                var ltimeFromLocal = this.GetLastChangedTimeFromLocalIfExist();
-                var ltimeFromServer = fetchManager.GetLastChangedTime();
-                if (ltimeFromLocal > DateTime.Now || ltimeFromLocal < ltimeFromServer)
-                {
-                    fetchManager.GetAllConfigs(out files, out items);
-                    downLoad = true;
-                    fetchManager.SaveLastChangedTime(ltimeFromServer);
-                }
+                fetchManager.GetAllConfigs(out files, out items);
+                fetchManager.SaveLastChangedTime(ltimeFromServer);
+                downLoad = true;
             }
-            catch (Exception e)
-            {
-                ex = e;
-            }
+
             if (!downLoad)
             {
                 //如果更新异常、或者不需要从服务端获取，则从本地恢复item
-                items = this.GetItemsFromLocalIfExist();
+                items = GetItemsFromLocalIfExist();
+
                 //file方式虽然本身就是替换了实际文件的，但发布时配置文件存在覆盖问题，所以也需要恢复
-                files = this.GetFilesFromLocalIfExist();
+                files = GetFilesFromLocalIfExist();
                 fetchManager.CopyFiles(files);
             }
-            this.RefreshAndInitItems(zkHosts, items);
-            this.RefreshAndInitFiles(zkHosts, files);
-            if (ex != null)
-            {
-                throw ex;
-            }
+
+            //刷新配置
+            RefreshAndInitItems(zkHosts, items);
+            RefreshAndInitFiles(zkHosts, files);
         }
+
+        /// <summary>
+        /// 刷新文件配置
+        /// </summary>
+        /// <param name="zkHosts"></param>
+        /// <param name="files"></param>
         private void RefreshAndInitFiles(string zkHosts, IEnumerable<string> files)
         {
             if (files != null)
             {
-                IZkTreeBuilder fileBuilder = new ZkFileTreeBuilder(config.ClientInfo.AppName, config.ClientInfo.Version, config.ClientInfo.Environment);
-                foreach (var file in files)
+                var fileBuilder = new ZkFileTreeBuilder(config.ClientInfo.AppName, config.ClientInfo.Version, config.ClientInfo.Environment);
+                foreach (var configName in files)
                 {
-                    fileBuilder.GetOrAddZnodeName(file);
-                    this._handler.Execute(() =>
-                    {
-                        if (!config.UpdateStrategy.FileIgnoreList.Contains(file))
-                        {
-                            //对于文件类型，如果本地没配置过Rule规则，则采用默认规则，即将文件复制到实际位置，然后RefreshSection配置对应的文件名
-                            this.FileRules.For(file);
-                            this.FileRules.ConfigChanged(file, null);
-                        }
-                    }, string.Format("Some thing is wrong with file '{0}'", file));//除了外部包含保证Exception不会导致程序异常，方法内部同样需要保证单次异常不会导致其它监控流程失败
+                    fileBuilder.GetOrAddZnodeName(configName);
+                    FileRules.For(configName).MapTo(configName);
+                    FileWatcher_NodeChanged(configName);
                 }
+
                 if (!string.IsNullOrWhiteSpace(zkHosts))
                 {
-                    this._fileWatcher = new NodeWatcher(zkHosts, 30000, fileBuilder, config.ClientInfo.ClientName);
-                    this._fileWatcher.NodeChanged += _fileWatcher_NodeChanged;
+                    _fileWatcher = new NodeWatcher(zkHosts, 30000, fileBuilder, config.ClientInfo.ClientName);
+                    _fileWatcher.NodeChanged += FileWatcher_NodeChanged;
                 }
             }
         }
+
+        /// <summary>
+        /// 刷新键值对
+        /// </summary>
+        /// <param name="zkHosts"></param>
+        /// <param name="items"></param>
         private void RefreshAndInitItems(string zkHosts, IDictionary<string, string> items)
         {
             if (items != null)
             {
-                IZkTreeBuilder itemBuilder = new ZkItemTreeBuilder(config.ClientInfo.AppName, config.ClientInfo.Version, config.ClientInfo.Environment);
-                foreach (var item in items.Keys)
+                var itemBuilder = new ZkItemTreeBuilder(config.ClientInfo.AppName, config.ClientInfo.Version, config.ClientInfo.Environment);
+                foreach (var itemName in items.Keys)
                 {
-                    itemBuilder.GetOrAddZnodeName(item);
-                    this._handler.Execute(() =>
-                    {
-                        if (!config.UpdateStrategy.ItemIgnoreList.Contains(item))
-                        {
-                            //键值对必须配置本地规则，否则无法处理
-                            this.ItemRules.ConfigChanged(item, items[item]);
-                        }
-                    }, string.Format("Some thing is wrong with item '{0}'", item));
+                    itemBuilder.GetOrAddZnodeName(itemName);
+                    ItemWatcher_NodeChanged(itemName);
                 }
+
                 if (!string.IsNullOrWhiteSpace(zkHosts))
                 {
-                    this._itemWatcher = new NodeWatcher(zkHosts, 30000, itemBuilder, config.ClientInfo.ClientName);
-                    this._itemWatcher.NodeChanged += _itemWatcher_NodeChanged;
+                    _itemWatcher = new NodeWatcher(zkHosts, 30000, itemBuilder, config.ClientInfo.ClientName);
+                    _itemWatcher.NodeChanged += ItemWatcher_NodeChanged;
                 }
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         private IEnumerable<string> GetFilesFromLocalIfExist()
         {
             IEnumerable<string> files = null;
@@ -172,6 +172,11 @@ namespace Disconf.Net.Client
             }
             return files;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         private IDictionary<string, string> GetItemsFromLocalIfExist()
         {
             IDictionary<string, string> dic = null;
@@ -192,6 +197,11 @@ namespace Disconf.Net.Client
             }
             return dic;
         }
+
+        /// <summary>
+        /// 如果本地文件存则从本地获取最后一次更新时间
+        /// </summary>
+        /// <returns></returns>
         private DateTime GetLastChangedTimeFromLocalIfExist()
         {
             var fileName = config.Preservation.TmpTimeLocalName;
@@ -200,40 +210,60 @@ namespace Disconf.Net.Client
                 string path = Path.Combine(config.Preservation.TmpRootPhysicalPath, fileName);
                 try
                 {
-                    DateTime dt;
-                    if (DateTime.TryParse(File.ReadAllText(path), out dt))
-                    {
+                    if (DateTime.TryParse(File.ReadAllText(path), out DateTime dt))
                         return dt;
-                    }
                 }
                 catch { }
             }
             return DateTime.MinValue;
         }
-        private void _itemWatcher_NodeChanged(string obj)
+
+        /// <summary>
+        /// 节点变更事件执行方法
+        /// </summary>
+        /// <param name="itemName"></param>
+        private void ItemWatcher_NodeChanged(string itemName)
         {
-            this._handler.Execute(() =>
-            {
-                if (!config.UpdateStrategy.ItemIgnoreList.Contains(obj))
-                {
-                    string value = FetchManager.Instance.GetItem(obj);
-                    this.ItemRules.ConfigChanged(obj, value);
-                }
-            }, string.Format("Some thing is wrong with item '{0}'", obj));
+            _handler.Execute(itemName, () =>
+             {
+                 if (!config.UpdateStrategy.ItemIgnoreList.Contains(itemName))
+                 {
+                     //获取键值对的值
+                     string value = FetchManager.Instance.GetItem(itemName);
+
+                     //节点更新完成事件
+                     NodeChanged(itemName, value);
+
+                     //推送给指定的回调函数
+                     ItemRules.ConfigChanged(itemName, value);
+                 }
+             });
         }
-        private void _fileWatcher_NodeChanged(string obj)
+
+        /// <summary>
+        /// 监听别点变更事件执行方法
+        /// </summary>
+        /// <param name="obj"></param>
+        private void FileWatcher_NodeChanged(string configName)
         {
-            this._handler.Execute(() =>
-            {
-                if (!config.UpdateStrategy.FileIgnoreList.Contains(obj))
-                {
-                    //更新本地文件
-                    if (FetchManager.Instance.DownloadFile(obj))
-                    {
-                        this.FileRules.ConfigChanged(obj, null);
-                    }
-                }
-            }, string.Format("Some thing is wrong with file '{0}'", obj));
+            _handler.Execute(configName, () =>
+             {
+                 //当前文件是否是过滤文件，如果是不更新
+                 if (config.UpdateStrategy.FileIgnoreList.Contains(configName))
+                     return;
+
+                 //下载并更新配置文件
+                 var configValue = FetchManager.Instance.GetConfig(configName);
+                 var isSaveSuccess = FetchManager.Instance.SaveAndCopyFile(configName, configValue);
+                 if (string.IsNullOrEmpty(configValue) || !isSaveSuccess)
+                     return;
+
+                 //节点更新完成事件
+                 NodeChanged(configName, configValue);
+
+                 //推送给指定的回调函数
+                 FileRules.ConfigChanged(configName, configValue);
+             });
         }
     }
 }

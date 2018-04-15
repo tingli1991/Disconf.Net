@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 
 namespace Disconf.Net.Client.Utils
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static class DirectoryHelper
     {
         /// <summary>

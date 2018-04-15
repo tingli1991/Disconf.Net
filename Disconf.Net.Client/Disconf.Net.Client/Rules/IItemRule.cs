@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Disconf.Net.Client.Rules
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public interface IItemRule : IRule
     {
         /// <summary>

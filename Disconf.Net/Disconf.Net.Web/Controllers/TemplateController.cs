@@ -21,6 +21,14 @@ namespace Disconf.Net.Web.Controllers
         private readonly IAppService _appService;
         private readonly IEnvService _envService;
         private readonly IConfigService _configService;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="templateService"></param>
+        /// <param name="configService"></param>
+        /// <param name="appService"></param>
+        /// <param name="envService"></param>
         public TemplateController(ITemplateService templateService, IConfigService configService, IAppService appService, IEnvService envService)
         {
             this._templateService = templateService;
@@ -28,19 +36,39 @@ namespace Disconf.Net.Web.Controllers
             this._envService = envService;
             this._configService = configService;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="appId"></param>
+        /// <returns></returns>
         public ActionResult Index(int? appId)
         {
             return View();
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Add()
         {
             return View();
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Edit()
         {
             return View();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public async Task<JsonResult> GetList()
         {
             var condition = new TemplateCondition();
@@ -58,6 +86,10 @@ namespace Disconf.Net.Web.Controllers
             return Json(list, JsonRequestBehavior.AllowGet);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public async Task<JsonResult> GetVersion()
         {
             var condition = new TemplateCondition();
@@ -71,6 +103,11 @@ namespace Disconf.Net.Web.Controllers
             return Json(list, JsonRequestBehavior.AllowGet);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<JsonResult> Get(long id)
         {
             var model = await _templateService.Get(id);
@@ -86,6 +123,12 @@ namespace Disconf.Net.Web.Controllers
             };
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [ActionLogActionFilter(ActionContent = "插入模板")]
         public async Task<JsonResult> Insert(Templates model)
         {
@@ -108,6 +151,12 @@ namespace Disconf.Net.Web.Controllers
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [ActionLogActionFilter(ActionContent = "更新模板")]
         public async Task<JsonResult> Update(Templates model)
         {
@@ -130,6 +179,11 @@ namespace Disconf.Net.Web.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [ActionLogActionFilter(ActionContent = "删除模板")]
         public async Task<JsonResult> Delete(long id)
         {
@@ -144,7 +198,11 @@ namespace Disconf.Net.Web.Controllers
                 return Json(await _templateService.Delete(id), JsonRequestBehavior.AllowGet);
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="qqfileName"></param>
+        /// <returns></returns>
         public JsonResult FileUpload(string qqfileName)
         {
             var result = new QueryResult<string>();
@@ -179,12 +237,15 @@ namespace Disconf.Net.Web.Controllers
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="result"></param>
+        /// <returns></returns>
         private bool CheckFileBase(QueryResult<string> result)
         {
             bool ret = new bool();
-
-            if (Request == null || Request.Files == null
-                || Request.Files.Count != 1 || Request.Files[0] == null)
+            if (Request == null || Request.Files == null || Request.Files.Count != 1 || Request.Files[0] == null)
             {
                 result.ErrorMsg = "错误的上传文件请求";
                 result.IsSuccess = false;
@@ -194,27 +255,32 @@ namespace Disconf.Net.Web.Controllers
             {
                 ret = true;
             }
-
             return ret;
         }
 
+        /// <summary>
+        /// 获取模板列表
+        /// </summary>
+        /// <returns></returns>
         public async Task<JsonResult> GetTemplateList()
         {
-            var condition = new TemplateCondition();
-            condition.AppId = AppId;
-            condition.EnvId = EnvId;
+            var condition = new TemplateCondition()
+            {
+                AppId = AppId,
+                EnvId = EnvId
+            };
             var list = await _templateService.GetTemplateList(condition);
             var appName = await _appService.GetAppNameById(AppId);
             var envName = await _envService.GetEnvNameById(EnvId);
-
             foreach (var s in list)
             {
                 try
                 {
                     var path = DisconfWatcher.GetPath(s.Name, appName, s.Version, envName, s.Type);
-                    s.ZookeeperChildren = string.Join("<br>", DisconfWatcher.GetChildren(path));
+                    var chilDrenList = DisconfWatcher.GetChildren(path);
+                    s.ZookeeperChildren = string.Join("<br>", chilDrenList);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
 
                 }
@@ -227,8 +293,11 @@ namespace Disconf.Net.Web.Controllers
             return Json(vmModel, JsonRequestBehavior.AllowGet);
         }
 
-
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="version"></param>
+        /// <returns></returns>
         public async Task<ActionResult> DownloadZip(string version)
         {
             var condition = new TemplateCondition

@@ -8,4 +8,3 @@ C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net\Disconf.Net.Domain\bin\D
 C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net\Disconf.Net.Domain\bin\Debug\DapperExtensions.pdb
 C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net\Disconf.Net.Domain\obj\Debug\Disconf.Net.Domain.dll
 C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net\Disconf.Net.Domain\obj\Debug\Disconf.Net.Domain.pdb
-C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net\Disconf.Net.Domain\obj\Debug\Disconf.Net.Domain.csprojResolveAssemblyReference.cache

@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Disconf.Net.Client.Rules
 {
-    public class RuleCollection<T>
-        where T : IRule, new()
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public class RuleCollection<T> where T : IRule, new()
     {
         private ConcurrentDictionary<string, T> _rules = new ConcurrentDictionary<string, T>();
+
         /// <summary>
         /// 根据configName获取对应的Rule对象
         /// </summary>
@@ -18,7 +18,7 @@ namespace Disconf.Net.Client.Rules
         /// <returns></returns>
         public T For(string configName)
         {
-            T rule = this._rules.GetOrAdd(configName, _ =>
+            T rule = _rules.GetOrAdd(configName, _ =>
             {
                 var t = new T();
                 t.MapTo(_);
@@ -27,12 +27,16 @@ namespace Disconf.Net.Client.Rules
             return rule;
         }
 
+        /// <summary>
+        /// 配置发生改变
+        /// </summary>
+        /// <param name="configName"></param>
+        /// <param name="changedValue"></param>
         public void ConfigChanged(string configName, string changedValue)
         {
-            T rule;
-            if (this._rules.TryGetValue(configName, out rule))
+            if (_rules.TryGetValue(configName, out T rule))
             {
-                rule.ConfigChanged(changedValue);
+                rule.ConfigChanged(configName, changedValue);
             }
         }
     }

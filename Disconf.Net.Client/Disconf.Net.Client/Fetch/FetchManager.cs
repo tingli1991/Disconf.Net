@@ -11,23 +11,34 @@ using System.Xml.Linq;
 
 namespace Disconf.Net.Client.Fetch
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class FetchManager
     {
         private readonly RetryPolicy _policy;
         private readonly IFetcher _fetcher;
         private ClientConfigSection config = ClientConfigSection.Current;
-
         public static readonly FetchManager Instance = new FetchManager();
 
+        /// <summary>
+        /// 
+        /// </summary>
         private FetchManager()
         {
-            this._policy = this.GetFixedRetryPolicy(config.UpdateStrategy.RetryTimes, config.UpdateStrategy.RetryIntervalSeconds);
-            this._fetcher = new Fetcher(config.WebApiHost, this._policy);
+            _policy = GetFixedRetryPolicy(config.UpdateStrategy.RetryTimes, config.UpdateStrategy.RetryIntervalSeconds);
+            _fetcher = new Fetcher(config.WebApiHost, _policy);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public string GetZookeeperHosts()
         {
-            return this._fetcher.GetZkHosts();
+            return _fetcher.GetZkHosts();
         }
+
         /// <summary>
         /// 获取所有配置
         /// </summary>
@@ -37,12 +48,13 @@ namespace Disconf.Net.Client.Fetch
         {
             files = new HashSet<string>();
             items = new Dictionary<string, string>();
-            var content = this._fetcher.GetAllConfigs(new FetchFilter
+            var content = _fetcher.GetAllConfigs(new FetchFilter
             {
                 AppName = config.ClientInfo.AppName,
                 Version = config.ClientInfo.Version,
                 Environment = config.ClientInfo.Environment
             });
+
             var dic = JsonConvert.DeserializeObject<Dictionary<ConfigType, Dictionary<string, string>>>(content);
             if (dic != null)
             {
@@ -52,29 +64,29 @@ namespace Disconf.Net.Client.Fetch
                     files = fileDic.Keys;
                     foreach (var key in fileDic.Keys)
                     {
-                        this.SaveAndCopyFile(key, fileDic[key]);
+                        SaveAndCopyFile(key, fileDic[key]);
                     }
-                    this.SaveFileList(files);
+                    SaveFileList(files);
                 }
                 if (dic.ContainsKey(ConfigType.Item) && dic[ConfigType.Item] != null)
                 {
                     items = dic[ConfigType.Item];
-                    this.SaveItems(items);
+                    SaveItems(items);
                 }
             }
         }
+
         /// <summary>
-        /// 根据配置名下载文件
+        /// 获取配置文件值
         /// </summary>
-        /// <param name="configName"></param>
+        /// <param name="configName">配置文件名称</param>
         /// <returns></returns>
-        public bool DownloadFile(string configName)
+        public string GetConfig(string configName)
         {
-            var filter = this.GetFilter(configName, ConfigType.File);
-            string content = this._fetcher.GetConfig(filter);
-            this.SaveAndCopyFile(configName, content);
-            return true;
+            var filter = GetFilter(configName, ConfigType.File);
+            return _fetcher.GetConfig(filter);
         }
+
         /// <summary>
         /// 根据配置名获取对应的值
         /// </summary>
@@ -82,16 +94,50 @@ namespace Disconf.Net.Client.Fetch
         /// <returns></returns>
         public string GetItem(string configName)
         {
-            var filter = this.GetFilter(configName, ConfigType.Item);
-            var value = this._fetcher.GetConfig(filter);
-            this.AddOrSetItem(configName, value);
+            var filter = GetFilter(configName, ConfigType.Item);
+            var value = _fetcher.GetConfig(filter);
+            AddOrSetItem(configName, value);
             return value;
         }
+
+        /// <summary>
+        /// 保存并且更新文件
+        /// </summary>
+        /// <param name="configName"></param>
+        /// <param name="content"></param>
+        public bool SaveAndCopyFile(string configName, string content)
+        {
+            var tempDir = config.Preservation.TmpRootPhysicalPath;
+            string tmpFileName = Path.Combine(tempDir, configName);
+            if (!Directory.Exists(tempDir))
+            {
+                //创建临时目录
+                Directory.CreateDirectory(tempDir);
+            }
+
+            File.WriteAllText(tmpFileName, content, Encoding.UTF8);
+            CopyFile(configName);
+            return true;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="retryCount"></param>
+        /// <param name="retryIntervalSeconds"></param>
+        /// <returns></returns>
         private RetryPolicy GetFixedRetryPolicy(int retryCount, int retryIntervalSeconds)
         {
             FixedInterval interval = new FixedInterval(retryCount, TimeSpan.FromSeconds(retryIntervalSeconds));
             return new RetryPolicy(RetryPolicy.DefaultFixed.ErrorDetectionStrategy, interval);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="configName"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
         private ConfigFetchFilter GetFilter(string configName, ConfigType type)
         {
             return new ConfigFetchFilter
@@ -103,18 +149,26 @@ namespace Disconf.Net.Client.Fetch
                 ConfigName = configName
             };
         }
-        private void SaveAndCopyFile(string configName, string content)
-        {
-            string tmpPath = Path.Combine(config.Preservation.TmpRootPhysicalPath, configName);
-            File.WriteAllText(tmpPath, content, Encoding.UTF8);
-            this.CopyFile(configName);
-        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="configName"></param>
         private void CopyFile(string configName)
         {
-            string tmpPath = Path.Combine(config.Preservation.TmpRootPhysicalPath, configName);
-            string factPath = Path.Combine(config.Preservation.FactRootPhysicalPath, configName);
-            File.Copy(tmpPath, factPath, true);
+            string tmpFileName = Path.Combine(config.Preservation.TmpRootPhysicalPath, configName);
+            string factFileName = Path.Combine(config.Preservation.FactRootPhysicalPath, configName);
+            if (!Directory.Exists(config.Preservation.FactRootPhysicalPath))
+            {
+                Directory.CreateDirectory(config.Preservation.FactRootPhysicalPath);
+            }
+            File.Copy(tmpFileName, factFileName, true);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="files"></param>
         public void CopyFiles(IEnumerable<string> files)
         {
             if (files != null)
@@ -123,7 +177,7 @@ namespace Disconf.Net.Client.Fetch
                 {
                     try
                     {
-                        this.CopyFile(file);
+                        CopyFile(file);
                     }
                     catch
                     {
@@ -131,6 +185,11 @@ namespace Disconf.Net.Client.Fetch
                 }
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ltime"></param>
         public void SaveLastChangedTime(DateTime ltime)
         {
             var fileName = config.Preservation.TmpTimeLocalName;
@@ -140,6 +199,11 @@ namespace Disconf.Net.Client.Fetch
                 File.WriteAllText(path, ltime.ToString("yyyy-MM-dd HH:mm:ss"));
             }
         }
+
+        /// <summary>
+        /// 批量保存配置文件名称到指定的文件中
+        /// </summary>
+        /// <param name="files"></param>
         private void SaveFileList(IEnumerable<string> files)
         {
             StringBuilder tmp = new StringBuilder();
@@ -155,6 +219,11 @@ namespace Disconf.Net.Client.Fetch
                 File.WriteAllText(path, tmp.ToString(), Encoding.UTF8);
             }
         }
+
+        /// <summary>
+        /// 批量保存键值对配置文件到指定的文件中
+        /// </summary>
+        /// <param name="items"></param>
         private void SaveItems(IDictionary<string, string> items)
         {
             var fileName = config.Preservation.TmpItemsLocalName;
@@ -166,16 +235,29 @@ namespace Disconf.Net.Client.Fetch
                     XElement root = new XElement("items");
                     foreach (var kv in items)
                     {
-                        this.AddElementItem(root, kv.Key, kv.Value);
+                        AddElementItem(root, kv.Key, kv.Value);
                     }
                     root.Save(path);
                 });
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="root"></param>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
         private void AddElementItem(XElement root, string key, string value)
         {
             root.Add(new XElement("item", new XAttribute("key", key), new XAttribute("value", value)));
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
         private void AddOrSetItem(string key, string value)
         {
             var fileName = config.Preservation.TmpItemsLocalName;
@@ -190,7 +272,7 @@ namespace Disconf.Net.Client.Fetch
                         var ele = root.Elements("item").FirstOrDefault(e => e.Attribute("key").Value == key);
                         if (ele == null)
                         {
-                            this.AddElementItem(root, key, value);
+                            AddElementItem(root, key, value);
                         }
                         else
                         {
@@ -202,9 +284,14 @@ namespace Disconf.Net.Client.Fetch
                 });
             }
         }
+
+        /// <summary>
+        /// 获取最后一次变更时间
+        /// </summary>
+        /// <returns></returns>
         public DateTime GetLastChangedTime()
         {
-            var content = this._fetcher.GetLastChangedTime(new FetchFilter
+            var content = _fetcher.GetLastChangedTime(new FetchFilter
             {
                 AppName = config.ClientInfo.AppName,
                 Version = config.ClientInfo.Version,

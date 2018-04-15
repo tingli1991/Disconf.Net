@@ -11,6 +11,9 @@ using System.Web.Mvc;
 
 namespace Disconf.Net.Web.Controllers
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class ConfigController : BaseController
     {
         private readonly IConfigService _configService;
@@ -18,6 +21,15 @@ namespace Disconf.Net.Web.Controllers
         private readonly IEnvService _envService;
         private readonly IPermissionService _permissionService;
         private readonly ITemplateService _templateService;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="configService"></param>
+        /// <param name="permissionService"></param>
+        /// <param name="appService"></param>
+        /// <param name="envService"></param>
+        /// <param name="templateService"></param>
         public ConfigController(IConfigService configService, IPermissionService permissionService, IAppService appService, IEnvService envService, ITemplateService templateService)
         {
             this._configService = configService;
@@ -26,6 +38,12 @@ namespace Disconf.Net.Web.Controllers
             this._envService = envService;
             this._templateService = templateService;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="appId"></param>
+        /// <returns></returns>
         public async Task<ActionResult> Index(int? appId)
         {
             if (appId.HasValue)
@@ -39,11 +57,21 @@ namespace Disconf.Net.Web.Controllers
             }
             return View();
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Edit()
         {
             return View();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<ActionResult> List(int id)
         {
             var hasAuthority = await _permissionService.AuthorityCheck(id + ".0", ((User)Session["User"]).RoleId);
@@ -55,6 +83,10 @@ namespace Disconf.Net.Web.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public async Task<JsonResult> GetList()
         {
             var model = await _configService.GetList();
@@ -65,6 +97,15 @@ namespace Disconf.Net.Web.Controllers
             return Json(list, JsonRequestBehavior.AllowGet);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="templateId"></param>
+        /// <param name="value"></param>
+        /// <param name="version"></param>
+        /// <param name="name"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public async Task<JsonResult> UpdateConfig(long? templateId, string value, string version, string name, int type)
         {
             var result = new QueryResult<long>();
@@ -81,6 +122,8 @@ namespace Disconf.Net.Web.Controllers
                     EnvId = EnvId,
                     TemplateId = templateId
                 };
+
+                value = value == null ? string.Empty : value.Trim();
                 var list = await _configService.GetList(condition);
                 if (list != null && list.ToList().Count > 0)
                 {
@@ -113,6 +156,11 @@ namespace Disconf.Net.Web.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="templateId"></param>
+        /// <returns></returns>
         public async Task<JsonResult> GetConfigByTemplateId(long templateId)
         {
             var condition = new ConfigCondition
@@ -124,6 +172,12 @@ namespace Disconf.Net.Web.Controllers
             var model = list.FirstOrDefault();
             return Json(model, JsonRequestBehavior.AllowGet);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<JsonResult> Delete(long id)
         {
             var config = await _configService.Get(id);
@@ -135,6 +189,11 @@ namespace Disconf.Net.Web.Controllers
             return Json(await _configService.Delete(id), JsonRequestBehavior.AllowGet);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="t"></param>
         private void ConfigLog<T>(T t)
         {
             dynamic model = t;

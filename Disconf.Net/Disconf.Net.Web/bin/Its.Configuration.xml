@@ -1,0 +1,754 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Its.Configuration</name>
+    </assembly>
+    <members>
+        <member name="T:Its.Recipes.AnonymousDisposable">
+            <summary>
+            A disposable that calls a specified action when disposed.
+            </summary>
+        </member>
+        <member name="M:Its.Recipes.AnonymousDisposable.#ctor(System.Action)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Its.Recipes.AnonymousDisposable" /> class.
+            </summary>
+            <param name="dispose">The action to be called when the anonymous disposable is disposed.</param>
+            <exception cref="T:System.ArgumentNullException">dispose</exception>
+        </member>
+        <member name="M:Its.Recipes.AnonymousDisposable.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+            <filterpriority>2</filterpriority>
+        </member>
+        <member name="T:Its.Recipes.ExceptionHandlingExtensions">
+            <summary>
+                Provides methods for evaluating and describing exceptions.
+            </summary>
+        </member>
+        <member name="M:Its.Recipes.ExceptionHandlingExtensions.HasBeenHandled(System.Exception)">
+            <summary>
+                Determines whether the exception has been handled.
+            </summary>
+            <param name="exception">The exception.</param>
+            <returns>
+                <c>true</c> if the exception has been handled; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Its.Recipes.ExceptionHandlingExtensions.InnerExceptions(System.Exception)">
+            <summary>
+                Returns all of the inner exceptions of an exception in a single sequence.
+            </summary>
+            <param name="exception">The exception.</param>
+        </member>
+        <member name="M:Its.Recipes.ExceptionHandlingExtensions.IsFatal(System.Exception)">
+            <summary>
+                Checks if an exception is considered fatal, i.e. cannot/should not be handled by an application.
+            </summary>
+            <param name="exception">Exception instance</param>
+            <returns>True if exception is considered fatal, or false otherwise</returns>
+        </member>
+        <member name="M:Its.Recipes.ExceptionHandlingExtensions.MarkAsHandled``1(``0)">
+            <summary>
+                Marks the exception as having been handled.
+            </summary>
+            <param name="exception">The exception.</param>
+        </member>
+        <member name="T:Its.Recipes.MaybeExtensions">
+            <summary>
+                Supports chaining of expressions when intermediate values may be null, to support a fluent API style using common .NET types.
+            </summary>
+        </member>
+        <member name="M:Its.Recipes.MaybeExtensions.Else``1(Its.Recipes.Maybe{``0},System.Func{``0})">
+            <summary>
+                Specifies a function that will be evaluated if the source <see cref="T:Its.Recipes.Maybe`1" /> has no value.
+            </summary>
+            <typeparam name="T">
+                The type held by the <see cref="T:Its.Recipes.Maybe`1" />.
+            </typeparam>
+            <param name="maybe">The source maybe.</param>
+            <param name="otherValue">The value to be returned if the <see cref="T:Its.Recipes.Maybe`1" /> has no value.</param>
+            <returns>
+                The value of the Maybe if it has a value; otherwise, the value returned by <paramref name="otherValue" />.
+            </returns>
+        </member>
+        <member name="M:Its.Recipes.MaybeExtensions.Else``1(Its.Recipes.Maybe{``0},System.Func{Its.Recipes.Maybe{``0}})">
+            <summary>
+                Specifies a function that will be evaluated if the source <see cref="T:Its.Recipes.Maybe`1" /> has no value.
+            </summary>
+            <typeparam name="T">
+                The type held by the <see cref="T:Its.Recipes.Maybe`1" />.
+            </typeparam>
+            <param name="maybe">The source maybe.</param>
+            <param name="other">The value to be returned if the <see cref="T:Its.Recipes.Maybe`1" /> has no value.</param>
+            <returns>
+                The value of the Maybe if it has a value; otherwise, the value returned by <paramref name="other" />.
+            </returns>
+        </member>
+        <member name="M:Its.Recipes.MaybeExtensions.Else``1(Its.Recipes.Maybe{Its.Recipes.Maybe{``0}},System.Func{``0})">
+            <summary>
+                Specifies a function that will be evaluated if the source <see cref="T:Its.Recipes.Maybe`1" /> has no value.
+            </summary>
+            <typeparam name="T">
+                The type held by the <see cref="T:Its.Recipes.Maybe`1" />.
+            </typeparam>
+            <param name="maybe">The source maybe.</param>
+            <param name="otherValue">The value to be returned if the <see cref="T:Its.Recipes.Maybe`1" /> has no value.</param>
+            <returns>
+                The value of the Maybe if it has a value; otherwise, the value returned by <paramref name="otherValue" />.
+            </returns>
+        </member>
+        <member name="M:Its.Recipes.MaybeExtensions.Else``1(Its.Recipes.Maybe{Its.Recipes.Maybe{Its.Recipes.Maybe{``0}}},System.Func{``0})">
+            <summary>
+                Specifies a function that will be evaluated if the source <see cref="T:Its.Recipes.Maybe`1" /> has no value.
+            </summary>
+            <typeparam name="T">
+                The type held by the <see cref="T:Its.Recipes.Maybe`1" />.
+            </typeparam>
+            <param name="maybe">The source maybe.</param>
+            <param name="otherValue">The value to be returned if the <see cref="T:Its.Recipes.Maybe`1" /> has no value.</param>
+            <returns>
+                The value of the Maybe if it has a value; otherwise, the value returned by <paramref name="otherValue" />.
+            </returns>
+        </member>
+        <member name="M:Its.Recipes.MaybeExtensions.Else``1(Its.Recipes.Maybe{Its.Recipes.Maybe{Its.Recipes.Maybe{Its.Recipes.Maybe{``0}}}},System.Func{``0})">
+            <summary>
+                Specifies a function that will be evaluated if the source <see cref="T:Its.Recipes.Maybe`1" /> has no value.
+            </summary>
+            <typeparam name="T">
+                The type held by the <see cref="T:Its.Recipes.Maybe`1" />.
+            </typeparam>
+            <param name="maybe">The source maybe.</param>
+            <param name="otherValue">The value to be returned if the <see cref="T:Its.Recipes.Maybe`1" /> has no value.</param>
+            <returns>
+                The value of the Maybe if it has a value; otherwise, the value returned by <paramref name="otherValue" />.
+            </returns>
+        </member>
+        <member name="M:Its.Recipes.MaybeExtensions.ElseDefault``1(Its.Recipes.Maybe{``0})">
+            <summary>
+            Returns the default value for <typeparamref name="T" /> if the <see cref="T:Its.Recipes.Maybe`1" /> has no value.
+            </summary>
+            <typeparam name="T">
+                The type held by the <see cref="T:Its.Recipes.Maybe`1" />.
+            </typeparam>
+        </member>
+        <member name="M:Its.Recipes.MaybeExtensions.ElseDefault``1(Its.Recipes.Maybe{Its.Recipes.Maybe{``0}})">
+            <summary>
+            Returns the default value for <typeparamref name="T" /> if the <see cref="T:Its.Recipes.Maybe`1" /> has no value.
+            </summary>
+            <typeparam name="T">
+                The type held by the <see cref="T:Its.Recipes.Maybe`1" />.
+            </typeparam>
+        </member>
+        <member name="M:Its.Recipes.MaybeExtensions.ElseDefault``1(Its.Recipes.Maybe{Its.Recipes.Maybe{Its.Recipes.Maybe{``0}}})">
+            <summary>
+            Returns the default value for <typeparamref name="T" /> if the <see cref="T:Its.Recipes.Maybe`1" /> has no value.
+            </summary>
+            <typeparam name="T">
+                The type held by the <see cref="T:Its.Recipes.Maybe`1" />.
+            </typeparam>
+        </member>
+        <member name="M:Its.Recipes.MaybeExtensions.ElseDefault``1(Its.Recipes.Maybe{Its.Recipes.Maybe{Its.Recipes.Maybe{Its.Recipes.Maybe{``0}}}})">
+            <summary>
+            Returns the default value for <typeparamref name="T" /> if the <see cref="T:Its.Recipes.Maybe`1" /> has no value.
+            </summary>
+            <typeparam name="T">
+                The type held by the <see cref="T:Its.Recipes.Maybe`1" />.
+            </typeparam>
+        </member>
+        <member name="M:Its.Recipes.MaybeExtensions.ElseNull``1(Its.Recipes.Maybe{``0})">
+            <summary>
+            Returns null if the source has no value.
+            </summary>
+            <typeparam name="T">The type held by the <see cref="T:Its.Recipes.Maybe`1" />.</typeparam>
+        </member>
+        <member name="M:Its.Recipes.MaybeExtensions.ElseDo``1(Its.Recipes.Maybe{``0},System.Action)">
+            <summary>
+            Performs an action if the <see cref="T:Its.Recipes.Maybe`1" /> has no value.
+            </summary>
+            <typeparam name="T">
+                The type held by the <see cref="T:Its.Recipes.Maybe`1" />.
+            </typeparam>
+        </member>
+        <member name="M:Its.Recipes.MaybeExtensions.IfContains``2(System.Collections.Generic.IDictionary{``0,``1},``0)">
+            <summary>
+                If the dictionary contains a value for a specified key, executes an action passing the corresponding value.
+            </summary>
+            <typeparam name="TKey"> The type of the key. </typeparam>
+            <typeparam name="TValue"> The type of the value. </typeparam>
+            <param name="dictionary"> The dictionary. </param>
+            <param name="key"> The key. </param>
+            <exception cref="T:System.ArgumentNullException">dictionary</exception>
+        </member>
+        <member name="M:Its.Recipes.MaybeExtensions.And``1(Its.Recipes.Maybe{``0})">
+            <summary>
+            Allows two maybes to be combined so that the resulting maybe has its value transformed by the second if and only if the first has a value.
+            </summary>
+            <typeparam name="T1">The type of the <see cref="T:Its.Recipes.Maybe`1" />.</typeparam>
+            <param name="first">The first maybe.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Its.Recipes.MaybeExtensions.IfHas``1(System.Object,System.Func{System.Object,``0})">
+            <summary>
+            Attempts to retrieve a value dynamically.
+            </summary>
+            <typeparam name="T">The type of the value expected to be returned.</typeparam>
+            <param name="source">The source object.</param>
+            <param name="getValue">A delegate that attempts to return a value via a dynamic invocation on the source object.</param>
+            <remarks>This method will not cast the result value to <typeparamref name="T" />. If the returned value is not of this type, then a negative <see cref="T:Its.Recipes.Maybe`1" /> will be returned.</remarks>
+        </member>
+        <member name="M:Its.Recipes.MaybeExtensions.IfNotNull``1(``0)">
+            <summary>
+            Creates a <see cref="T:Its.Recipes.Maybe`1" />, allowing <see cref="M:Its.Recipes.MaybeExtensions.Then``2(Its.Recipes.Maybe{``0},System.Func{``0,``1})" /> and <see cref="M:Its.Recipes.MaybeExtensions.Else``1(Its.Recipes.Maybe{``0},System.Func{``0})" /> operations to be chained and evaluated conditionally based on whether source is null. 
+            </summary>
+            <typeparam name="T">The type of the instance wrapped by the <see cref="T:Its.Recipes.Maybe`1" />.</typeparam>
+            <param name="source">The source instance, which may be null.</param>
+        </member>
+        <member name="M:Its.Recipes.MaybeExtensions.IfNotNull``1(System.Nullable{``0})">
+            <summary>
+            Creates a <see cref="T:Its.Recipes.Maybe`1" />, allowing <see cref="M:Its.Recipes.MaybeExtensions.Then``2(Its.Recipes.Maybe{``0},System.Func{``0,``1})" /> and <see cref="M:Its.Recipes.MaybeExtensions.Else``1(Its.Recipes.Maybe{``0},System.Func{``0})" /> operations to be chained and evaluated conditionally based on whether source is null. 
+            </summary>
+            <typeparam name="T">The type of the instance wrapped by the <see cref="T:Its.Recipes.Maybe`1" />.</typeparam>
+            <param name="source">The source instance, which may be null.</param>
+        </member>
+        <member name="M:Its.Recipes.MaybeExtensions.IfNotNullOrEmptyOrWhitespace(System.String)">
+            <summary>
+            Determines whether a string is null, empty, or consists entirely of whitespace.
+            </summary>
+            <param name="value">The string.</param>
+        </member>
+        <member name="M:Its.Recipes.MaybeExtensions.IfTypeIs``1(System.Object)">
+            <summary>
+                Returns a Maybe.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="source">The source.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Its.Recipes.MaybeExtensions.OrEmpty``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+                Returns either the source or, if it is null, an empty <see cref="T:System.Collections.Generic.IEnumerable`1" /> sequence.
+            </summary>
+            <typeparam name="T"> The type of the objects in the sequence. </typeparam>
+            <param name="source"> The source sequence. </param>
+            <returns> The source sequence or, if it is null, an empty sequence. </returns>
+        </member>
+        <member name="M:Its.Recipes.MaybeExtensions.Out``2(``0,Its.Recipes.TryGetOutParameter{``0,``1})">
+            <summary>
+            Attempts to get the value of a Try* method with an out parameter, for example <see cref="M:System.Collections.Generic.Dictionary`2.TryGetValue(`0,`1@)" /> or <see cref="M:System.Collections.Concurrent.ConcurrentQueue`1.TryDequeue(`0@)" />.
+            </summary>
+            <typeparam name="T">The type of the source object.</typeparam>
+            <typeparam name="TOut">The type the out parameter.</typeparam>
+            <param name="source">The source object exposing the Try* method.</param>
+            <param name="tryTryGetValue">A delegate to call the Try* method.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Its.Recipes.MaybeExtensions.Then``2(Its.Recipes.Maybe{``0},System.Func{``0,``1})">
+            <summary>
+            Specifies the result of a <see cref="T:Its.Recipes.Maybe`1" /> if the <see cref="T:Its.Recipes.Maybe`1" /> has a value.
+            </summary>
+            <typeparam name="TIn">The type of source object.</typeparam>
+            <typeparam name="TOut">The type of result.</typeparam>
+            <param name="maybe">The maybe.</param>
+            <param name="getValue">A delegate to get the value from the source object.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Its.Recipes.MaybeExtensions.ThenDo``1(Its.Recipes.Maybe{``0},System.Action{``0})">
+            <summary>
+            Performs an action if the <see cref="T:Its.Recipes.Maybe`1" /> has a value.
+            </summary>
+            <typeparam name="T">
+                The type held by the <see cref="T:Its.Recipes.Maybe`1" />.
+            </typeparam>
+        </member>
+        <member name="M:Its.Recipes.MaybeExtensions.Try``2(``0,System.Func{``0,``1},System.Func{System.Exception,System.Boolean})">
+            <summary>
+            Tries to call the specified method and catches exceptions if they occur.
+            </summary>
+            <typeparam name="TIn">The type of source object.</typeparam>
+            <typeparam name="TOut">The type of result.</typeparam>
+            <param name="source">The source object.</param>
+            <param name="getValue">A delegate to get the value from the source object.</param>
+            <param name="ignore">A predicate to determine whether the exception should be ignored. If this is not specified, all exceptions are ignored. If it is specified and an exception is thrown that matches the predicate, the exception is ignored and a <see cref="T:Its.Recipes.Maybe`1" /> having no value is returned. If it is specified and an exception is thrown that does not match the predicate, the exception is allowed to propagate.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Its.Recipes.Maybe`1">
+            <summary>
+            Represents an object that may or may not contain a value, allowing optional chained results to be specified for both possibilities.
+            </summary>
+            <typeparam name="T">The type of the possible value.</typeparam>
+        </member>
+        <member name="M:Its.Recipes.Maybe`1.Yes(`0)">
+            <summary>
+            Returns a <see cref="T:Its.Recipes.Maybe`1" /> that contains a value.
+            </summary>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:Its.Recipes.Maybe`1.No">
+            <summary>
+            Returns a <see cref="T:Its.Recipes.Maybe`1" /> that does not contain a value.
+            </summary>
+        </member>
+        <member name="P:Its.Recipes.Maybe`1.Value">
+            <summary>
+            Gets the value contained by the <see cref="T:Its.Recipes.Maybe`1" />.
+            </summary>
+            <value>
+            The value.
+            </value>
+        </member>
+        <member name="P:Its.Recipes.Maybe`1.HasValue">
+            <summary>
+            Gets a value indicating whether this instance has a value.
+            </summary>
+            <value>
+              <c>true</c> if this instance has value; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:Its.Recipes.TryGetOutParameter`2">
+            <summary>
+            A delegate used to return an out parameter from a Try* method that indicates success via a boolean return value.
+            </summary>
+            <typeparam name="T">The type of the source object.</typeparam>
+            <typeparam name="TOut">The type of the out parameter.</typeparam>
+            <param name="source">The source.</param>
+            <param name="outValue">The out parameter's value.</param>
+            <returns>true if the out parameter was set; otherwise, false.</returns>
+        </member>
+        <member name="T:Its.Recipes.Unit">
+            <summary>
+            A type representing a void return type.
+            </summary>
+        </member>
+        <member name="F:Its.Recipes.Unit.Default">
+            <summary>
+            The default instance.
+            </summary>
+        </member>
+        <member name="T:Its.Configuration.AzureApplicationSettings">
+            <summary>
+            Windows Azure settings.
+            </summary>
+        </member>
+        <member name="M:Its.Configuration.AzureApplicationSettings.#ctor">
+            <summary>
+            Initializes the settings.
+            </summary>
+        </member>
+        <member name="M:Its.Configuration.AzureApplicationSettings.IsMissingSettingException(System.Exception)">
+            <summary>
+            Checks whether the given exception represents an exception throws
+            for a missing setting.
+            </summary>
+            <param name="e">Exception</param>
+            <returns>True for the missing setting exception.</returns>
+        </member>
+        <member name="M:Its.Configuration.AzureApplicationSettings.GetSetting(System.String)">
+            <summary>
+            Gets a setting with the given name.
+            </summary>
+            <param name="name">Setting name.</param>
+            <returns>Setting value or null if such setting does not exist.</returns>
+        </member>
+        <member name="M:Its.Configuration.AzureApplicationSettings.GetValue(System.String,System.String,System.Func{System.String,System.String})">
+            <summary>
+            Gets setting's value from the given provider.
+            </summary>
+            <param name="providerName">Provider name.</param>
+            <param name="settingName">Setting name</param>
+            <param name="getValue">Method to obtain given setting.</param>
+            <returns>Setting value, or null if not found.</returns>
+        </member>
+        <member name="M:Its.Configuration.AzureApplicationSettings.GetServiceRuntimeSetting(System.String)">
+            <summary>
+            Gets a configuration setting from the service runtime.
+            </summary>
+            <param name="name">Setting name.</param>
+            <returns>Setting value or null if not found.</returns>
+        </member>
+        <member name="M:Its.Configuration.AzureApplicationSettings.GetServiceRuntimeAssembly">
+            <summary>
+            Loads and returns the latest available version of the service 
+            runtime assembly.
+            </summary>
+            <returns>Loaded assembly, if any.</returns>
+        </member>
+        <member name="M:Its.Configuration.AzureApplicationSettings.GetSerializedSetting(System.String)">
+            <summary>
+            Gets a settings string corresponding to the specified key.
+            </summary>
+            <param name="name">The name of the setting.</param>
+            <returns>
+            A string representing serialized settings.
+            </returns>
+        </member>
+        <member name="P:Its.Configuration.AzureApplicationSettings.Name">
+            <summary>
+                Gets the name of the settings source.
+            </summary>
+        </member>
+        <member name="P:Its.Configuration.AzureApplicationSettings.IsAvailable">
+            <summary>
+                Gets a value indicating whether Azure RoleEnvironment is available.
+            </summary>
+            <value>
+                <c>true</c> if this instance is available; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:Its.Configuration.BehaviorSubject`1.OnNext(`0)">
+            <summary>
+            Provides the observer with new data.
+            </summary>
+            <param name="value">The current notification information.</param>
+        </member>
+        <member name="M:Its.Configuration.BehaviorSubject`1.OnError(System.Exception)">
+            <summary>
+            Notifies the observer that the provider has experienced an error condition.
+            </summary>
+            <param name="error">An object that provides additional information about the error.</param>
+        </member>
+        <member name="M:Its.Configuration.BehaviorSubject`1.OnCompleted">
+            <summary>
+            Notifies the observer that the provider has finished sending push-based notifications.
+            </summary>
+        </member>
+        <member name="M:Its.Configuration.BehaviorSubject`1.Subscribe(System.IObserver{`0})">
+            <summary>
+            Notifies the provider that an observer is to receive notifications.
+            </summary>
+            <returns>
+            The observer's interface that enables resources to be disposed.
+            </returns>
+            <param name="observer">The object that is to receive notifications.</param>
+        </member>
+        <member name="M:Its.Configuration.BehaviorSubject`1.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="T:Its.Configuration.ConfigDirectorySettings">
+            <summary>
+            Provides settings based on a set of files in a specified configuration folder.
+            </summary>
+        </member>
+        <member name="M:Its.Configuration.ConfigDirectorySettings.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Its.Configuration.ConfigDirectorySettings"/> class.
+            </summary>
+            <param name="directoryPath">The directory path to where the configuration files are located.</param>
+        </member>
+        <member name="M:Its.Configuration.ConfigDirectorySettings.GetSerializedSetting(System.String)">
+            <summary>
+                Gets a settings string corresponding to the specified key.
+            </summary>
+            <param name="key">The key.</param>
+            <returns>A string representing serialized settings.</returns>
+        </member>
+        <member name="P:Its.Configuration.ConfigDirectorySettings.Files">
+            <summary>
+            Gets the list of files found in the configuration directory.
+            </summary>
+        </member>
+        <member name="P:Its.Configuration.ConfigDirectorySettings.Name">
+            <summary>
+                Gets the name of the settings source.
+            </summary>
+        </member>
+        <member name="T:Its.Configuration.Deployment">
+            <summary>
+                Provides information about an application's physical deployment.
+            </summary>
+        </member>
+        <member name="P:Its.Configuration.Deployment.Directory">
+            <summary>
+            Gets the path of the directory where the application is running.
+            </summary>
+        </member>
+        <member name="T:Its.Configuration.DeserializeSettings">
+            <summary>
+            Deserializes a string into a specified type.
+            </summary>
+            <param name="targetType">The type to which the settings should be deserialized.</param>
+            <param name="serialized">The serialized settings.</param>
+            <returns>An instance of <paramref name="targetType" />.</returns>
+        </member>
+        <member name="M:Its.Configuration.DictionaryExtensions.GetOrAdd``2(System.Collections.Generic.IDictionary{``0,``1},``0,System.Func{``0,``1})">
+            <summary>
+              Gets the a value having the specified key from the dictionary. If it is not present, the supplied function is called and the result is added to the dictionary and returned.
+            </summary>
+        </member>
+        <member name="T:Its.Configuration.GetConfigurationValue">
+            <summary>
+            Gets a raw value from configuration.
+            </summary>
+            <param name="key">The key for the configuration value.</param>
+        </member>
+        <member name="T:Its.Configuration.GetSerializedSetting">
+            <summary>
+                Accesses a settings string corresponding to the specified key.
+            </summary>
+            <param name="key">The key.</param>
+            <returns>A string representing serialized settings.</returns>
+        </member>
+        <member name="T:Its.Configuration.ISettingsSource">
+            <summary>
+                Provides access to settings.
+            </summary>
+        </member>
+        <member name="M:Its.Configuration.ISettingsSource.GetSerializedSetting(System.String)">
+            <summary>
+                Gets a settings string corresponding to the specified key.
+            </summary>
+            <param name="key">The key.</param>
+            <returns>A string representing serialized settings.</returns>
+        </member>
+        <member name="P:Its.Configuration.ISettingsSource.Name">
+            <summary>
+                Gets the name of the settings source.
+            </summary>
+        </member>
+        <member name="T:Its.Configuration.CryptographyExtensions">
+            <summary>
+            Provides simplified methods for encryption and decryption using <see cref="T:System.Security.Cryptography.Pkcs.EnvelopedCms" />.
+            </summary>
+        </member>
+        <member name="M:Its.Configuration.CryptographyExtensions.Encrypt(System.String,System.Security.Cryptography.X509Certificates.X509Certificate2)">
+            <summary>
+            Encrypts the specified string.
+            </summary>
+            <param name="plaintext">The plaintext to be encrypted.</param>
+            <param name="certificate">The certificate to be used for encryption.</param>
+            <returns>The encrypted text.</returns>
+        </member>
+        <member name="M:Its.Configuration.CryptographyExtensions.Decrypt(System.String,System.Security.Cryptography.X509Certificates.X509Certificate2[])">
+            <summary>
+            Decrypts the specified string.
+            </summary>
+            <param name="ciphertext">The ciphertext to be decrypted.</param>
+            <param name="certificates">A set of certificates containing the one that was used to encrypt the ciphertext.</param>
+            <returns>The decrypted text.</returns>
+        </member>
+        <member name="M:Its.Configuration.NativeMethods.GetAssemblyPath(System.String)">
+            <summary>
+            Gets an assembly path from the GAC given a partial name.
+            </summary>
+            <param name="name">An assembly partial name. May not be null.</param>
+            <returns>
+            The assembly path if found; otherwise null;
+            </returns>
+        </member>
+        <member name="T:Its.Configuration.Settings">
+            <summary>
+            Provides access to settings.
+            </summary>
+        </member>
+        <member name="M:Its.Configuration.Settings.#cctor">
+            <summary>
+                Initializes the <see cref="T:Its.Configuration.Settings" /> class.
+            </summary>
+        </member>
+        <member name="M:Its.Configuration.Settings.CreateSource(Its.Configuration.GetSerializedSetting,System.String)">
+            <summary>
+                Creates the source.
+            </summary>
+            <param name="getSetting">A delegate that gets a setting based on a provided key.</param>
+            <param name="name">The name (optional) of the source.</param>
+            <returns></returns>
+        </member>
+        <member name="F:Its.Configuration.Settings.Deserialize">
+            <summary>
+                Deserializes configuration settings.
+            </summary>
+        </member>
+        <member name="M:Its.Configuration.Settings.GetCertificatesFromConfigDirectory">
+            <summary>
+            Gets all certificates from locations matching the current precedence within the .config directory.
+            </summary>
+        </member>
+        <member name="M:Its.Configuration.Settings.GetCertificatesFromStore(System.Security.Cryptography.X509Certificates.StoreLocation,System.Security.Cryptography.X509Certificates.StoreName)">
+            <summary>
+            Gets certificates from the certificate store.
+            </summary>
+            <param name="storeLocation">The store location.</param>
+            <param name="storeName">The name of the store.</param>
+        </member>
+        <member name="F:Its.Configuration.Settings.GetSerializedSetting">
+            <summary>
+                Gets the value for a configuration setting corresponding to the provided key.
+            </summary>
+        </member>
+        <member name="M:Its.Configuration.Settings.GetSerializedSettingDefault(System.String)">
+            <summary>
+                Gets the serialized setting default.
+            </summary>
+        </member>
+        <member name="M:Its.Configuration.Settings.GetFile(System.Func{System.IO.FileInfo,System.Boolean})">
+            <summary>
+            Gets the first file in any active .config folder, in order of precedence, that matches the predicate, or null if none match.
+            </summary>
+            <param name="matching">A predicate for matching the file.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Its.Configuration.Settings.GetFiles">
+            <summary>
+            Gets the  files in the active config folders that match the specified precedence.
+            </summary>
+        </member>
+        <member name="M:Its.Configuration.Settings.DeserializeDefault(System.Type,System.String)">
+            <summary>
+                Implements the default settings deserialization method, which is to deserialize the specified string using <see cref="T:System.Web.Script.Serialization.JavaScriptSerializer" />
+            </summary>
+        </member>
+        <member name="M:Its.Configuration.Settings.Get(System.Type)">
+            <summary>
+                Gets a settings object of the specified type.
+            </summary>
+        </member>
+        <member name="M:Its.Configuration.Settings.Get``1">
+            <summary>
+                Gets a settings object of the specified type.
+            </summary>
+        </member>
+        <member name="M:Its.Configuration.Settings.Reset">
+            <summary>
+                Resets settings to the default behavior.
+            </summary>
+        </member>
+        <member name="P:Its.Configuration.Settings.Sources">
+            <summary>
+                Gets or sets the sources that are used to look up settings.
+            </summary>
+            <remarks>Each source is called in order until one returns a non-null, non-whitespace value, which is the value that is used. Setting this property to null resets it to the default behavior.</remarks>
+        </member>
+        <member name="P:Its.Configuration.Settings.Precedence">
+            <summary>
+                Gets or sets the precedence of settings folders.
+            </summary>
+        </member>
+        <member name="P:Its.Configuration.Settings.SettingsDirectory">
+            <summary>
+                Gets or sets the root directory where file-based settings are looked up.
+            </summary>
+        </member>
+        <member name="P:Its.Configuration.Settings.CertificatePassword">
+            <summary>
+            Gets or sets a function to access the password for a given certificate, given a string representing the certificate's file name.
+            </summary>
+        </member>
+        <member name="M:Its.Configuration.Settings.AppSetting(System.String)">
+            <summary>
+                Gets a setting from AppSettings, checking Azure configuration first and falling back to web.config/app.config if the setting is not found or if it is empty.
+            </summary>
+            <param name="key">The key for the setting.</param>
+            <returns>The configured value.</returns>
+        </member>
+        <member name="T:Its.Configuration.Settings.For`1">
+            <summary>
+                Provides access to settings for a specified type.
+            </summary>
+            <typeparam name="T">The type that holds the configuration settings.</typeparam>
+        </member>
+        <member name="M:Its.Configuration.Settings.For`1.#ctor">
+            <summary>
+                Initializes a new instance of the <see cref="T:Its.Configuration.Settings.For`1" /> class.
+            </summary>
+        </member>
+        <member name="P:Its.Configuration.Settings.For`1.Value">
+            <summary>
+                Gets the configured settings for type <typeparamref name="T" />.
+            </summary>
+        </member>
+        <member name="F:Its.Configuration.Settings.For`1.Deserialize">
+            <summary>
+                Specifies how the settings for type <typeparamref name="T" /> should be deserialized.
+            </summary>
+        </member>
+        <member name="F:Its.Configuration.Settings.For`1.GetSerializedSetting">
+            <summary>
+                Specifies how the settings for type <typeparamref name="T" /> should be retrieved.
+            </summary>
+        </member>
+        <member name="P:Its.Configuration.Settings.For`1.Key">
+            <summary>
+                Gets or sets the key used to look up the settings in configuration.
+            </summary>
+            <exception cref="T:System.ArgumentException">The key cannot be null, empty, or consist entirely of whitespace.</exception>
+        </member>
+        <member name="M:Its.Configuration.Settings.Set``1(``0)">
+            <summary>
+            Sets the <paramref name="setting"/> object to be returned when <see cref="M:Its.Configuration.Settings.Get``1"/> is called for the specified <typeparamref name="TSetting"/>.
+            </summary>
+            <typeparam name="TSetting">The type of the setting.</typeparam>
+            <param name="setting">The setting to return when <see cref="M:Its.Configuration.Settings.Get``1"/> is called for the specified <typeparamref name="TSetting"/>.</param>
+        </member>
+        <member name="T:System.Dynamic.TypeExtensions">
+            <summary>
+                Provides dynamic methods to assist in reflection-based tasks.
+            </summary>
+        </member>
+        <member name="M:System.Dynamic.TypeExtensions.Member(System.Type)">
+            <summary>
+                Provides dynamic access to a static member on the specified type.
+            </summary>
+            <param name="type">The type on which to access the member.</param>
+            <returns>The value, if any, of the member.</returns>
+        </member>
+        <member name="T:System.Dynamic.TypeExtensions.StaticMemberInvoker">
+            <summary>
+                Forwards dynamc calls to static members on a target type.
+            </summary>
+        </member>
+        <member name="M:System.Dynamic.TypeExtensions.StaticMemberInvoker.#ctor(System.Type)">
+            <summary>
+                Initializes a new instance of the <see cref="T:System.Dynamic.TypeExtensions.StaticMemberInvoker" /> class.
+            </summary>
+            <param name="targetType">The type.</param>
+            <exception cref="T:System.ArgumentNullException">type</exception>
+        </member>
+        <member name="M:System.Dynamic.TypeExtensions.StaticMemberInvoker.TryGetMember(System.Dynamic.GetMemberBinder,System.Object@)">
+            <summary>
+                Provides the implementation for operations that get member values. Classes derived from the
+                <see
+                    cref="T:System.Dynamic.DynamicObject" />
+                class can override this method to specify dynamic behavior for operations such as getting a value for a property.
+            </summary>
+            <returns>
+                true if the operation is successful; otherwise, false. If this method returns false, the run-time binder of the language determines the behavior. (In most cases, a run-time exception is thrown.)
+            </returns>
+            <param name="binder">
+                Provides information about the object that called the dynamic operation. The binder.Name property provides the name of the member on which the dynamic operation is performed. For example, for the Console.WriteLine(sampleObject.SampleProperty) statement, where sampleObject is an instance of the class derived from the
+                <see
+                    cref="T:System.Dynamic.DynamicObject" />
+                class, binder.Name returns "SampleProperty". The binder.IgnoreCase property specifies whether the member name is case-sensitive.
+            </param>
+            <param name="result">
+                The result of the get operation. For example, if the method is called for a property, you can assign the property value to
+                <paramref
+                    name="result" />
+                .
+            </param>
+        </member>
+        <member name="M:System.Dynamic.TypeExtensions.StaticMemberInvoker.TryInvokeMember(System.Dynamic.InvokeMemberBinder,System.Object[],System.Object@)">
+            <summary>
+                Provides the implementation for operations that invoke a member. Classes derived from the
+                <see
+                    cref="T:System.Dynamic.DynamicObject" />
+                class can override this method to specify dynamic behavior for operations such as calling a method.
+            </summary>
+            <returns>
+                true if the operation is successful; otherwise, false. If this method returns false, the run-time binder of the language determines the behavior. (In most cases, a language-specific run-time exception is thrown.)
+            </returns>
+            <param name="binder">
+                Provides information about the dynamic operation. The binder.Name property provides the name of the member on which the dynamic operation is performed. For example, for the statement sampleObject.SampleMethod(100), where sampleObject is an instance of the class derived from the
+                <see
+                    cref="T:System.Dynamic.DynamicObject" />
+                class, binder.Name returns "SampleMethod". The binder.IgnoreCase property specifies whether the member name is case-sensitive.
+            </param>
+            <param name="args">
+                The arguments that are passed to the object member during the invoke operation. For example, for the statement sampleObject.SampleMethod(100), where sampleObject is derived from the <see cref="T:System.Dynamic.DynamicObject" /> class, <paramref name="args" /> is equal to 100.
+            </param>
+            <param name="result">The result of the member invocation.</param>
+        </member>
+    </members>
+</doc>

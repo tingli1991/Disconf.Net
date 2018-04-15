@@ -38,9 +38,9 @@ namespace Disconf.Net.Core.Zookeeper
         /// <param name="timeOut">zookeeper session timout,单位毫秒(ms)</param>
         public ConnectWatcher(string connectionString, int timeOut)
         {
-            this._connectionString = connectionString;
-            this._sessionTimeOut = timeOut;
-            this.Connect();
+            _connectionString = connectionString;
+            _sessionTimeOut = timeOut;
+            Connect();
         }
 
         /// <summary>
@@ -69,10 +69,10 @@ namespace Disconf.Net.Core.Zookeeper
         private void Connect()
         {
             latch = new CountDownLatch(1);
-            this.ZooKeeper = new ZooKeeper.Net.ZooKeeper(this._connectionString, TimeSpan.FromMilliseconds(this._sessionTimeOut), this);
+            ZooKeeper = new ZooKeeper.Net.ZooKeeper(_connectionString, TimeSpan.FromMilliseconds(_sessionTimeOut), this);
             try
             {
-                latch.Await(this._connectTimeOut);
+                latch.Await(_connectTimeOut);
             }
             catch (Exception)
             {
@@ -91,13 +91,13 @@ namespace Disconf.Net.Core.Zookeeper
                 {
                     try
                     {
-                        if (this.ZooKeeper != null && !States.CLOSED.Equals(this.ZooKeeper.State))
+                        if (ZooKeeper != null && !States.CLOSED.Equals(ZooKeeper.State))
                         {
                             break;
                         }
-                        this.Dispose();
-                        this.Connect();
-                        this.ReConnectCallBack();
+                        Dispose();
+                        Connect();
+                        ReConnectCallBack();
                     }
                     catch
                     {
@@ -119,9 +119,9 @@ namespace Disconf.Net.Core.Zookeeper
         /// </summary>
         public void Dispose()
         {
-            if (this.ZooKeeper != null)
+            if (ZooKeeper != null)
             {
-                this.ZooKeeper.Dispose();
+                ZooKeeper.Dispose();
             }
         }
     }

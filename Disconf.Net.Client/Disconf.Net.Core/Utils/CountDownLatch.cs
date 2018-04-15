@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace Disconf.Net.Core.Utils
 {
@@ -14,17 +10,30 @@ namespace Disconf.Net.Core.Utils
     {
         int _count;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="count"></param>
         public CountDownLatch(int count)
         {
-            this._count = count;
+            _count = count;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public void CountDown()
         {
-            if (this._count > 0)
+            if (_count > 0)
             {
                 Interlocked.Decrement(ref _count);
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="millisecond"></param>
         public void Await(long millisecond = 0)
         {
             var intervalMs = 10;
@@ -35,7 +44,7 @@ namespace Disconf.Net.Core.Utils
             var count = Math.Ceiling(millisecond * 1.0 / intervalMs);
             for (var i = 0; i < count; i++)
             {
-                if (this._count <= 0)
+                if (_count <= 0)
                 {
                     return;
                 }

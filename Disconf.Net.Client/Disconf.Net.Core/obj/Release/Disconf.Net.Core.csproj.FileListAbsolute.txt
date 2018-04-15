@@ -1,0 +1,11 @@
+C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\Disconf.Net.Core\bin\Release\Disconf.Net.Core.dll
+C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\Disconf.Net.Core\bin\Release\Disconf.Net.Core.pdb
+C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\Disconf.Net.Core\bin\Release\log4net.dll
+C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\Disconf.Net.Core\bin\Release\ZooKeeper.Net.dll
+C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\Disconf.Net.Core\bin\Release\ZooKeeper.Net.pdb
+C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\Disconf.Net.Core\bin\Release\log4net.xml
+C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\Disconf.Net.Core\obj\Release\Disconf.Net.Core.csprojResolveAssemblyReference.cache
+C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\Disconf.Net.Core\obj\Release\Disconf.Net.Core.dll
+C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\Disconf.Net.Core\obj\Release\Disconf.Net.Core.pdb
+C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\Disconf.Net.Core\bin\Release\Sigil.dll
+C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\Disconf.Net.Core\bin\Release\Sigil.xml

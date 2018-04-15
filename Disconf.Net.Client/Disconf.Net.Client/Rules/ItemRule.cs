@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Disconf.Net.Client.Rules
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class ItemRule : IItemRule
     {
         /// <summary>
@@ -18,25 +18,35 @@ namespace Disconf.Net.Client.Rules
         /// </summary>
         internal Action<string> Action { get; private set; }
         private List<PropertyMap> _list = new List<PropertyMap>();
-        
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="action"></param>
+        /// <returns></returns>
         public IItemRule CallBack(Action<string> action)
         {
             if (action != null)
             {
-                this.Action += action;
+                Action += action;
             }
             return this;
         }
 
-        public void ConfigChanged(string changedValue)
+        /// <summary>
+        /// 配置文件发生改变
+        /// </summary>
+        /// <param name="configName">配置文件名称</param>
+        /// <param name="changedValue"></param>
+        public void ConfigChanged(string configName, string changedValue)
         {
-            if (this._list != null && this._list.Count > 0)
+            if (_list != null && _list.Count > 0)
             {
-                foreach (var map in this._list)
+                foreach (var map in _list)
                 {
                     try
                     {
-                        var pi = map.GetPropertyInfo(this.DefaultPropName);
+                        var pi = map.GetPropertyInfo(DefaultPropName);
                         if (pi != null)
                         {
                             object value;
@@ -54,21 +64,28 @@ namespace Disconf.Net.Client.Rules
                     catch { }//这里暂时没想好怎么传递异常
                 }
             }
-            if (this.Action != null)
-            {
-                this.Action(changedValue);
-            }
+            Action?.Invoke(changedValue);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propName"></param>
+        /// <returns></returns>
         public IItemRule MapTo(string propName)
         {
             if (!string.IsNullOrWhiteSpace(propName))
             {
-                this.DefaultPropName = this.GetPropName(propName);
+                DefaultPropName = GetPropName(propName);
             }
             return this;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propName"></param>
+        /// <returns></returns>
         private string GetPropName(string propName)
         {
             int idx = propName.LastIndexOf('.');
@@ -79,14 +96,30 @@ namespace Disconf.Net.Client.Rules
             return propName;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="prop"></param>
+        /// <param name="typeConvert"></param>
+        /// <returns></returns>
         public IItemRule SetProperty(object entity, PropertyInfo prop, Func<string, object> typeConvert = null)
         {
-            return this.SetProperty(entity, null, null, prop, typeConvert);
+            return SetProperty(entity, null, null, prop, typeConvert);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="entityType"></param>
+        /// <param name="propName"></param>
+        /// <param name="prop"></param>
+        /// <param name="typeConvert"></param>
+        /// <returns></returns>
         private IItemRule SetProperty(object entity, Type entityType, string propName, PropertyInfo prop, Func<string, object> typeConvert = null)
         {
-            this._list.Add(new PropertyMap
+            _list.Add(new PropertyMap
             {
                 Entity = entity,
                 EntityType = entityType,
@@ -97,25 +130,55 @@ namespace Disconf.Net.Client.Rules
             return this;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="entity"></param>
+        /// <param name="propName"></param>
+        /// <param name="typeConvert"></param>
+        /// <returns></returns>
         public IItemRule SetProperty<T>(T entity, string propName = null, Func<string, object> typeConvert = null)
         {
-            return this.SetProperty(entity, typeof(T), propName, null, typeConvert);
+            return SetProperty(entity, typeof(T), propName, null, typeConvert);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="prop"></param>
+        /// <param name="typeConvert"></param>
+        /// <returns></returns>
         public IItemRule SetStaticProperty(PropertyInfo prop, Func<string, object> typeConvert = null)
         {
-            return this.SetProperty(null, prop, typeConvert);
+            return SetProperty(null, prop, typeConvert);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="propName"></param>
+        /// <param name="typeConvert"></param>
+        /// <returns></returns>
         public IItemRule SetStaticProperty<T>(string propName = null, Func<string, object> typeConvert = null)
         {
-            return this.SetProperty<T>(default(T), propName, typeConvert);
-        }
-        IRule IRule.MapTo(string configName)
-        {
-            return this.MapTo(configName);
+            return SetProperty<T>(default(T), propName, typeConvert);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="configName"></param>
+        /// <returns></returns>
+        IRule IRule.MapTo(string configName)
+        {
+            return MapTo(configName);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         private class PropertyMap
         {
             public object Entity { get; set; }
@@ -129,19 +192,19 @@ namespace Disconf.Net.Client.Rules
                 因为无法确认SetProperty和MapTo方法被调用的先后顺序
                 所以通过PropertyName来得到对应的PropertyInfo这个过程只能在最后调用
                 */
-                PropertyInfo pi = this.PropertyInfo;
+                PropertyInfo pi = PropertyInfo;
                 if (pi == null)
                 {
-                    string propName = this.PropertyName;
+                    string propName = PropertyName;
                     if (string.IsNullOrWhiteSpace(propName))
                     {
                         propName = defaultPropertyName;
                     }
                     if (!string.IsNullOrWhiteSpace(propName))
                     {
-                        pi = this.EntityType.GetProperty(propName);
+                        pi = EntityType.GetProperty(propName);
                     }
-                    this.PropertyInfo = pi;
+                    PropertyInfo = pi;
                 }
                 return pi;
             }

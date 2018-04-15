@@ -1,0 +1,6 @@
+C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\ZooKeeper.Net\bin\Release\ZooKeeper.Net.dll
+C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\ZooKeeper.Net\bin\Release\ZooKeeper.Net.pdb
+C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\ZooKeeper.Net\bin\Release\log4net.dll
+C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\ZooKeeper.Net\bin\Release\log4net.xml
+C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\ZooKeeper.Net\obj\Release\ZooKeeper.Net.dll
+C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net.Client\ZooKeeper.Net\obj\Release\ZooKeeper.Net.pdb

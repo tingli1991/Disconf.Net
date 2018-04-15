@@ -1,0 +1,11 @@
+C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net\Disconf.Net.Domain\bin\Release\Disconf.Net.Domain.dll
+C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net\Disconf.Net.Domain\bin\Release\Disconf.Net.Domain.pdb
+C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net\Disconf.Net.Domain\bin\Release\AutoMapper.dll
+C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net\Disconf.Net.Domain\bin\Release\Dapper.dll
+C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net\Disconf.Net.Domain\bin\Release\DapperExtensions.dll
+C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net\Disconf.Net.Domain\bin\Release\AutoMapper.xml
+C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net\Disconf.Net.Domain\bin\Release\Dapper.xml
+C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net\Disconf.Net.Domain\bin\Release\DapperExtensions.pdb
+C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net\Disconf.Net.Domain\obj\Release\Disconf.Net.Domain.dll
+C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net\Disconf.Net.Domain\obj\Release\Disconf.Net.Domain.pdb
+C:\Users\litin\Desktop\Platform\Disconf.Net\Disconf.Net\Disconf.Net.Domain\obj\Release\Disconf.Net.Domain.csprojResolveAssemblyReference.cache

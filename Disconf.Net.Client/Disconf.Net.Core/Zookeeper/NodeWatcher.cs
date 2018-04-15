@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using ZooKeeper.Net;
+using Disconf.Net.Core.Utils;
 
 namespace Disconf.Net.Core.Zookeeper
 {
@@ -25,7 +26,7 @@ namespace Disconf.Net.Core.Zookeeper
         /// 
         /// </summary>
         private IZkTreeBuilder _builder;
-        
+
         /// <summary>
         /// znode发生变化时的回调事件，arg1对应configName
         /// </summary>
@@ -41,13 +42,13 @@ namespace Disconf.Net.Core.Zookeeper
         public NodeWatcher(string connectionString, int timeOut, IZkTreeBuilder builder, string clientName = null)
             : base(connectionString, timeOut)
         {
-            this._builder = builder;
+            _builder = builder;
             if (string.IsNullOrWhiteSpace(clientName))
             {
                 clientName = Environment.MachineName;
             }
-            this._clientName = Encoding.UTF8.GetBytes(clientName);
-            this.RegisterWatcher();
+            _clientName = Encoding.UTF8.GetBytes(clientName);
+            RegisterWatcher();
         }
 
         /// <summary>
@@ -55,15 +56,15 @@ namespace Disconf.Net.Core.Zookeeper
         /// </summary>
         protected override void ReConnectCallBack()
         {
-            var configs = this.RegisterWatcher();
-            if (this.NodeChanged != null)
+            var configs = RegisterWatcher();
+            if (NodeChanged != null)
             {
                 //Expired之后变更的节点需要补调通知
                 foreach (var config in configs)
                 {
                     if (!string.IsNullOrWhiteSpace(config))
                     {
-                        this.NodeChanged(config);
+                        NodeChanged(config);
                     }
                 }
             }
@@ -75,48 +76,39 @@ namespace Disconf.Net.Core.Zookeeper
         public IEnumerable<string> RegisterWatcher()
         {
             var configs = new HashSet<string>();
-            if (this._builder != null)
+            if (_builder != null)
             {
-                long mtime = this._mtime;
-                foreach (var node in this._builder.GetAllZnodes())
+                long mtime = _mtime;
+                var znodes = _builder.GetAllZnodes();
+                foreach (var node in znodes)
                 {
-                    var path = this._builder.GetZkPath(node);
+                    var path = _builder.GetZkPath(node);
                     try
                     {
-                        var stat = this.ZooKeeper.Exists(path, true);
+                        var stat = ZooKeeper.Exists(path, true);
                         if (stat != null)
                         {
-                            if (this._mtime > 0 && stat.Mtime > this._mtime)
-                            {//通过_mtime是否大于0进行判断是第一次还是Expired后重连，只有重连时才需要返回变更过的节点
-                                configs.Add(this._builder.GetConfigName(node));
+                            if (_mtime > 0 && stat.Mtime > _mtime)
+                            {
+                                //通过_mtime是否大于0进行判断是第一次还是Expired后重连，只有重连时才需要返回变更过的节点
+                                configs.Add(_builder.GetConfigName(node));
                             }
-                            this.AddTmpChildNode(path);
+                            ZooKeeper.AddTmpChildNode(path, _clientName);
                             mtime = Math.Max(mtime, stat.Mtime);
                         }
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         //TODO:可能需要判断Expired
                     }
                 }
-                this._mtime = mtime;
+                _mtime = mtime;
             }
             return configs;
         }
 
         /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="path"></param>
-        private void AddTmpChildNode(string path)
-        {
-            //添加监控时同时增加临时节点，表明客户端已经下载过节点数据，删除节点部分工作由服务端进行
-            string nodePath = string.Format("{0}/{1}", path, Guid.NewGuid());
-            this.ZooKeeper.Create(nodePath, this._clientName, Ids.OPEN_ACL_UNSAFE, CreateMode.Ephemeral);//注意使用的是临时节点
-        }
-
-        /// <summary>
-        /// 
+        /// 监控进程
         /// </summary>
         /// <param name="event"></param>
         public override void Process(WatchedEvent @event)
@@ -126,18 +118,19 @@ namespace Disconf.Net.Core.Zookeeper
             {
                 case EventType.NodeDataChanged:
                     var path = @event.Path;
-                    if (this.NodeChanged != null && !string.IsNullOrWhiteSpace(path))
+                    if (NodeChanged != null && !string.IsNullOrWhiteSpace(path))
                     {
-                        this.NodeChanged(this._builder.GetConfigName(Path.GetFileName(path)));
+                        NodeChanged(_builder.GetConfigName(Path.GetFileName(path)));
                         try
                         {
                             //重新注册监控
                             //这里可能会存在Expired问题
-                            var stat = this.ZooKeeper.Exists(path, true);
-                            this.AddTmpChildNode(path);
-                            this._mtime = stat.Mtime;//按正常逻辑，最后更新的节点，mtime肯定比目前记录的mtime大，所以这里不进行Math.Max处理
+                            var stat = ZooKeeper.Exists(path, true);
+                            ZooKeeper.AddTmpChildNode(path, _clientName);
+                            //按正常逻辑，最后更新的节点，mtime肯定比目前记录的mtime大，所以这里不进行Math.Max处理
+                            _mtime = stat.Mtime;
                         }
-                        catch (Exception ex)
+                        catch (Exception)
                         {
                             //TODO:可能需要判断Expired
                         }
