@@ -10,7 +10,25 @@ Disconf的.net版，含配置管理平台及客户端
 详细介绍请点击链接（本项目的原作者）
 http://www.cnblogs.com/qkbao/p/6638721.html
 
+#Web.config 或者App.config新增配置节点
+``` java    
+<configSections>
+    <section name="disconfSections" type="Disconf.Net.Client.ClientConfigSection, Disconf.Net.Client" />
+</configSections>
+<disconfSections configSource="Configs\disconfSections.config" />
+```
 
+#disconfSections.config
+``` java
+<?xml version="1.0" encoding="utf-8" ?>
+<disconfSections host="http://192.168.3.18:81/" enableRemote="true">
+  <client appName="Quartz.Scheduler.Web" environment="TEST" version="1.0.0" clientName="Web.Test" />
+  <updateStrategy fileIgnores="" itemIgnores="" startedSync="true" retryTimes="3" retryIntervalSeconds="10" />
+  <preservation absolutePath="false" tmpRootDirectory="Tmp\Download\Configs" factRootDirectory="Configs" tmpItemsLocalName="~items.xml" tmpFilesLocalName="~files.txt"/>
+</disconfSections>
+```
+
+#具体参数说明请看源码 ClientConfigSection 的具体属性
 ``` java    
 /// <summary>
 /// Disconf.Net 的客户端配置参数
@@ -61,22 +79,4 @@ public class ClientConfigSection : ConfigurationSection
             base.PostDeserialize();
     }
 }
-```
-
-#Web.config 或者App.config新增配置节点
-``` java    
-<configSections>
-    <section name="disconfSections" type="Disconf.Net.Client.ClientConfigSection, Disconf.Net.Client" />
-</configSections>
-<disconfSections configSource="Configs\disconfSections.config" />
-```
-
-#disconfSections.config
-``` java
-<?xml version="1.0" encoding="utf-8" ?>
-<disconfSections host="http://192.168.3.18:81/" enableRemote="true">
-  <client appName="Quartz.Scheduler.Web" environment="TEST" version="1.0.0" clientName="Web.Test" />
-  <updateStrategy fileIgnores="" itemIgnores="" startedSync="true" retryTimes="3" retryIntervalSeconds="10" />
-  <preservation absolutePath="false" tmpRootDirectory="Tmp\Download\Configs" factRootDirectory="Configs" tmpItemsLocalName="~items.xml" tmpFilesLocalName="~files.txt"/>
-</disconfSections>
 ```
