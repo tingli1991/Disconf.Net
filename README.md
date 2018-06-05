@@ -11,7 +11,7 @@ Disconf的.net版，含配置管理平台及客户端
 http://www.cnblogs.com/qkbao/p/6638721.html
 
 # Web.config 或者App.config新增配置节点
-``` java    
+``` csharp    
 <configSections>
   <section name="disconfSections" type="Disconf.Net.Client.ClientConfigSection, Disconf.Net.Client" />
 </configSections>
@@ -19,7 +19,7 @@ http://www.cnblogs.com/qkbao/p/6638721.html
 ```
 
 # disconfSections.config
-``` java
+``` csharp
 <?xml version="1.0" encoding="utf-8" ?>
 <disconfSections host="http://192.168.3.18:81/" enableRemote="true">
   <client appName="Quartz.Scheduler.Web" environment="TEST" version="1.0.0" clientName="Web.Test" />
