@@ -10,7 +10,8 @@ Disconf的.net版，含配置管理平台及客户端
 详细介绍请点击链接（本项目的原作者）
 http://www.cnblogs.com/qkbao/p/6638721.html
 
-    /// <summary>
+``` java    
+/// <summary>
     /// Disconf.Net的客户端配置参数
     /// </summary>
     public class ClientConfigSection : ConfigurationSection
@@ -59,3 +60,4 @@ http://www.cnblogs.com/qkbao/p/6638721.html
             base.PostDeserialize();
         }
     }
+```
