@@ -10,7 +10,7 @@ Disconf的.net版，含配置管理平台及客户端
 详细介绍请点击链接（本项目的原作者）
 http://www.cnblogs.com/qkbao/p/6638721.html
 
-# Web.config 或者App.config新增配置节点
+### Web.config 或者App.config新增配置节点
 ``` csharp    
 <configSections>
   <section name="disconfSections" type="Disconf.Net.Client.ClientConfigSection, Disconf.Net.Client" />
@@ -18,7 +18,7 @@ http://www.cnblogs.com/qkbao/p/6638721.html
 <disconfSections configSource="Configs\disconfSections.config" />
 ```
 
-# disconfSections.config
+### disconfSections.config
 ``` csharp
 <?xml version="1.0" encoding="utf-8" ?>
 <disconfSections host="http://192.168.3.18:81/" enableRemote="true">
@@ -28,7 +28,7 @@ http://www.cnblogs.com/qkbao/p/6638721.html
 </disconfSections>
 ```
 
-# 具体参数说明请看源码 ClientConfigSection 的具体属性
+### 具体参数说明请看源码 ClientConfigSection 的具体属性
 ``` csharp    
 /// <summary>
 /// Disconf.Net 的客户端配置参数
@@ -77,6 +77,55 @@ public class ClientConfigSection : ConfigurationSection
     {
             Uri uri = new Uri(WebApiHost);//用来验证uri是否正确
             base.PostDeserialize();
+    }
+}
+```
+
+### 客户端工具类（客户端只需要调用DisconfConfigRules的注册方法并做好disconfSections.config的相关配置即可使用）
+``` csharp  
+/// <summary>
+/// DisConf配置规则
+/// </summary>
+public class DisconfConfigRules
+{
+    private static readonly ILog _log = LogManager.GetLogger(typeof(DisconfConfigRules));
+
+    /// <summary>
+    /// 注册Disconf配置更新规则
+    /// </summary>
+    public static void Register()
+    {
+        Register(ConfigManager.Instance);
+    }
+
+    /// <summary>
+    /// 注册Disconf配置更新规则
+    /// </summary>
+    /// <param name="manager"></param>
+    private static void Register(ConfigManager manager)
+    {
+        manager.NodeChanged += Manager_NodeChanged;
+        manager.Exception += Manager_Exception;
+        manager.Init();
+    }
+
+    /// <summary>
+    /// 异常事件
+    /// </summary>
+    /// <param name="ex"></param>
+    private static void Manager_Exception(Exception ex)
+    {
+        _log.Error($"Disconf配置监听发生未经处理的异常：", ex);
+    }
+
+    /// <summary>
+    /// 节点变更
+    /// </summary>
+    /// <param name="configName"></param>
+    /// <param name="configValue"></param>
+    private static void Manager_NodeChanged(string configName, string configValue)
+    {
+        _log.Info($"配置文件：{configValue}发生改变，改变后的值为：{configValue}");
     }
 }
 ```
