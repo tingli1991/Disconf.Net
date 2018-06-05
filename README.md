@@ -10,7 +10,7 @@ Disconf的.net版，含配置管理平台及客户端
 详细介绍请点击链接（本项目的原作者）
 http://www.cnblogs.com/qkbao/p/6638721.html
 
-### Web.config 或者App.config新增配置节点
+#### Web.config 或者App.config新增配置节点
 ``` csharp    
 <configSections>
   <section name="disconfSections" type="Disconf.Net.Client.ClientConfigSection, Disconf.Net.Client" />
@@ -18,7 +18,7 @@ http://www.cnblogs.com/qkbao/p/6638721.html
 <disconfSections configSource="Configs\disconfSections.config" />
 ```
 
-### disconfSections.config
+#### disconfSections.config
 ``` csharp
 <?xml version="1.0" encoding="utf-8" ?>
 <disconfSections host="http://192.168.3.18:81/" enableRemote="true">
@@ -28,7 +28,7 @@ http://www.cnblogs.com/qkbao/p/6638721.html
 </disconfSections>
 ```
 
-### 具体参数说明请看源码 ClientConfigSection 的具体属性
+#### 具体参数说明请看源码 ClientConfigSection 的具体属性
 ``` csharp    
 /// <summary>
 /// Disconf.Net 的客户端配置参数
@@ -81,7 +81,7 @@ public class ClientConfigSection : ConfigurationSection
 }
 ```
 
-### 客户端工具类（客户端只需要调用DisconfConfigRules的注册方法并做好disconfSections.config的相关配置即可使用）
+#### 客户端工具类（客户端只需要调用DisconfConfigRules的注册方法并做好disconfSections.config的相关配置即可使用）
 ``` csharp  
 /// <summary>
 /// DisConf配置规则
