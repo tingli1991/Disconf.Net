@@ -33,6 +33,12 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Disconf.Net.Core, Version=1.0.0.42, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Disconf.Net.Core.1.0.0.42\lib\net46\Disconf.Net.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\EnterpriseLibrary.TransientFaultHandling.6.0.1304.0\lib\portable-net45+win+wp8\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.dll</HintPath>
       <Private>True</Private>
@@ -60,6 +66,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="ZooKeeper.Net, Version=1.0.0.24, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZooKeeper.Net.1.0.0.24\lib\net451\ZooKeeper.Net.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config\ClientConfigSection.cs" />
@@ -81,12 +90,7 @@
     <Compile Include="Utils\DirectoryHelper.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Disconf.Net.Core\Disconf.Net.Core.csproj">
-      <Project>{f08853ff-4f87-468e-a06a-68e4ce0e3da3}</Project>
-      <Name>Disconf.Net.Core</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
+    <None Include="Disconf.Net.Client.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

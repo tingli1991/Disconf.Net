@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>$id$</id>
+    <title>$title$</title>
+    <version>$version$</version>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>https://github.com/tingli1991/ZooKeeper.Net</licenseUrl>
+    <projectUrl>https://github.com/tingli1991/ZooKeeper.Net</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <!--版本变更说明-->
+    <releaseNotes></releaseNotes>
+    <!--版权--> 
+    <copyright>Copyright 2018</copyright>
+    <!--语言-->
+    <language>zh-CN</language>
+    <tags>.net asp.net</tags>
+    <dependencies>
+      <group targetFramework=".NETFramework4.5.1">
+        <dependency id="ZooKeeper.Net" version="1.0.0" />
+        <dependency id="Disconf.Net.Core" version="1.0.0" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <!--<file src="..\xxx\xxx.dll" target="lib\net45" />-->
+  </files>
+</package>

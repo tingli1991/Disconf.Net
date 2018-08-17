@@ -51,9 +51,9 @@ namespace Disconf.Net.Core.Utils
         /// <param name="elementCollection"></param>
         /// <param name="key"></param>
         /// <returns></returns>
-        public static ConfigurationElement GetNameValue(this ConnectionStringSettingsCollection elementCollection, string key)
+        public static string GetNameValue(this ConnectionStringSettingsCollection elementCollection, string key)
         {
-            return elementCollection[key];
+            return elementCollection[key].ConnectionString;
         }
 
         /// <summary>

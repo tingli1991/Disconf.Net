@@ -48,6 +48,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="ZooKeeper.Net, Version=1.0.0.24, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZooKeeper.Net.1.0.0.24\lib\net451\ZooKeeper.Net.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\ConfigFetchFilter.cs" />
@@ -68,13 +71,10 @@
     <Compile Include="Zookeeper\ZkTreeBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ZooKeeper.Net\ZooKeeper.Net.csproj">
-      <Project>{6d370b1a-8bcf-434b-93aa-44ce5adc9a5d}</Project>
-      <Name>ZooKeeper.Net</Name>
-    </ProjectReference>
+    <None Include="Disconf.Net.Core.nuspec" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
